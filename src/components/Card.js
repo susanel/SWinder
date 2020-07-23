@@ -1,7 +1,57 @@
 import React from "react";
 import characterImg from "../assets/characters/1.jpg";
 
-const Card = () => {
+const characterMessage = [
+  "I have a big lightsaber and know how to use it...",
+  "Have been looking for love in Alderaan places.",
+  "Open-minded and wanting to explore",
+];
+
+const AboutCharacterInfo = ({ character }) => {
+  const characterFeatures = [
+    { title: "gender", feature: character.gender },
+    { title: "homeworld", feature: character.homeworld },
+    { title: "height", feature: character.height },
+    { title: "weight", feature: character.mass },
+    { title: "hair color", feature: character.hair_color },
+    { title: "eye color", feature: character.eye_color },
+  ];
+
+  const info_divs = characterFeatures.map((item, i) => (
+    <div className="more-info" key={i}>
+      <strong>{item.title} : </strong>
+      {item.feature}
+    </div>
+  ));
+
+  const getMessage = () => {
+    const number = Math.floor(Math.random() * characterMessage.length);
+    const message = characterMessage[number];
+    return message;
+  };
+
+  return (
+    <div className="about">
+      <p>{getMessage()}</p>
+      {info_divs}
+    </div>
+  );
+};
+
+const Card = ({ character }) => {
+  const getRandomNumber = (unit) => {
+    const numberKm = Math.floor(Math.random() * 21);
+    const numberMin = Math.floor(Math.random() * 60);
+
+    if (unit === "km") {
+      console.log(unit);
+      return numberKm;
+    } else if (unit === "min") {
+      console.log(unit);
+      return numberMin;
+    }
+  };
+
   return (
     <div className="card-wrapper">
       <div className="card">
@@ -10,17 +60,13 @@ const Card = () => {
         </div>
         <div className="info">
           <div className="short-info">
-            <span>Luke</span>, <span>23</span>
+            <span>{character.name}</span>, <span>23</span>
           </div>
           <div className="log-info">
-            <span>3 kilometers away </span>
-            <span>Active: 19 minutes ago</span>
+            <span>{getRandomNumber("km")} kilometers away</span>
+            <span> Active: {getRandomNumber("min")} minutes ago</span>
           </div>
-          <div className="about">
-            <p>I have a big lightsaber and know how to use it...</p>
-            <p>Have been looking for love in Alderaan places</p>
-            <p>Open-minded and wanting to explore</p>
-          </div>
+          <AboutCharacterInfo character={character} />
         </div>
       </div>
     </div>
