@@ -6,19 +6,19 @@ const characterMessages = [
   "Open-minded and wanting to explore",
 ];
 
-const AboutCharacterInfo = ({ character }) => {
+const AboutUserInfo = ({ user }) => {
   const characterFeatures = [
-    { title: "gender", feature: character.gender },
-    { title: "homeworld", feature: character.homeworld },
-    { title: "height", feature: character.height },
-    { title: "weight", feature: character.mass },
-    { title: "hair color", feature: character.hair_color },
-    { title: "eye color", feature: character.eye_color },
+    { title: "gender", feature: user.gender },
+    { title: "homeworld", feature: user.homeworld },
+    { title: "height", feature: user.height },
+    { title: "weight", feature: user.mass },
+    { title: "hair color", feature: user.hair_color },
+    { title: "eye color", feature: user.eye_color },
   ];
 
   const info_divs = characterFeatures.map((item, i) => (
     <div key={i}>
-      <strong>{item.title} : </strong>
+      <strong>{item.title}: </strong>
       {item.feature}
     </div>
   ));
@@ -32,12 +32,15 @@ const AboutCharacterInfo = ({ character }) => {
   return (
     <div className="about">
       <p>{getMessage()}</p>
-      <div className="more-info">{info_divs}</div>
+      <div className="more-info">
+        <p>Details:</p>
+        {info_divs}
+      </div>
     </div>
   );
 };
 
-const Card = ({ character, imgPath }) => {
+const Card = ({ user, imgPath }) => {
   const getRandomNumber = (unit) => {
     const numberKm = Math.floor(Math.random() * 21);
     const numberMin = Math.floor(Math.random() * 60);
@@ -57,13 +60,13 @@ const Card = ({ character, imgPath }) => {
         </div>
         <div className="info">
           <div className="short-info">
-            <span>{character.name}</span>, <span>23</span>
+            <span>{user.name}</span>, <span>23</span>
           </div>
           <div className="log-info">
             <span>{getRandomNumber("km")} kilometers away</span>
             <span> Active: {getRandomNumber("min")} minutes ago</span>
           </div>
-          <AboutCharacterInfo character={character} />
+          <AboutUserInfo user={user} />
         </div>
       </div>
     </div>

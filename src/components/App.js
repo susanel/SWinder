@@ -12,6 +12,38 @@ import { faTimes, faHeart } from "@fortawesome/free-solid-svg-icons";
 import Card from "./Card";
 import Matches from "./Matches";
 
+const Buttons = ({ handleCharacterChange }) => {
+  const btns = [
+    {
+      className: "times",
+      matchText: "nope",
+      icon: faTimes,
+      style: { width: 40, height: 40, color: "#EA6B4F" },
+    },
+    {
+      classname: "heart",
+      matchText: "like",
+      icon: faHeart,
+      style: { width: 40, height: 40, color: "#76BF93" },
+    },
+  ];
+
+  return (
+    <div className="btns">
+      {btns.map((btn, index) => (
+        <button
+          className={btn.className}
+          onClick={() => {
+            handleCharacterChange(btn.matchText);
+          }}
+        >
+          <FontAwesomeIcon icon={btn.icon} style={btn.style} />
+        </button>
+      ))}
+    </div>
+  );
+};
+
 class App extends Component {
   state = {
     users: [],
@@ -135,35 +167,14 @@ class App extends Component {
         {this.state.usersEnd ? (
           <Matches likedUsers={this.state.likedUsers} />
         ) : (
-          <Card user={this.state.userOnDisplay} imgPath={this.state.imgPath} />
+          <>
+            <Card
+              user={this.state.userOnDisplay}
+              imgPath={this.state.imgPath}
+            />
+            <Buttons handleCharacterChange={this.handleCharacterChange} />
+          </>
         )}
-
-        {/* <Matches likedUsers={this.state.likedUsers} /> */}
-
-        <div className="btns">
-          <button
-            className="times"
-            onClick={() => {
-              this.handleCharacterChange("nope");
-            }}
-          >
-            <FontAwesomeIcon
-              icon={faTimes}
-              style={{ width: 40, height: 40, color: "#EA6B4F" }}
-            />
-          </button>
-          <button
-            className="heart"
-            onClick={() => {
-              this.handleCharacterChange("like");
-            }}
-          >
-            <FontAwesomeIcon
-              icon={faHeart}
-              style={{ width: 40, height: 40, color: "#76BF93" }}
-            />
-          </button>
-        </div>
       </main>
     );
   }
