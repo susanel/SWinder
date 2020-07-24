@@ -33,6 +33,7 @@
         border-radius: 10px
         background-color: orange
         overflow: hidden
+        transsition: .2s
         img
           width: 100%
           +position-center()
@@ -41,19 +42,22 @@
           content: "like"
           display: block
           color: #76BF93
-          position: absolute
-          top: 50%
-          left: 50%
+          +position-center() 
+        &.nope::after
+          content: "nope"
+          display: block
+          color: #EA6B4F
+          +position-center() 
+        &.like::after, &.nope::after
           transform: translate(-50%,-50%) rotate(-20deg)
-          // width: 100%
-          z-index: 1
-          font-size: 7rem
-          text-transform: uppercase
-          font-weight: bold
+          padding: 8px 40px
           border: 6px solid
           border-radius: 10px
-          padding: 8px 40px
-          letter-spacing: 2px
+          font-size: 7rem
+          font-weight: bold
+          letter-spacing: 2px 
+          text-transform: uppercase
+          z-index: 1
       .info
         padding: 12px
         .short-info

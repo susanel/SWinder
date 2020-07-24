@@ -56,20 +56,36 @@ class App extends Component {
       .catch((error) => console.log(error));
   };
 
-  handleCharacterChange = () => {
+  handleCharacterChange = (userInput) => {
     let counter = this.state.counter;
     counter++;
 
     if (counter < this.state.characters.length) {
-      // console.log("kolejna postać", counter, this.state.characters[counter]);
-      this.getImgPath(counter);
-      // console.log(this.state.imgPath);
+      //Add like/nope animation
+      const img_div = document.querySelector(".char-img");
+      if (userInput === "like") {
+        console.log(img_div);
+        img_div.classList.add("like");
+      } else if (userInput === "nope") {
+        console.log(img_div);
+        img_div.classList.add("nope");
+      }
 
-      const characterOnDisplay = this.state.characters[counter];
-      this.setState({
-        counter,
-        characterOnDisplay,
-      });
+      setTimeout(() => {
+        // remove animation
+        img_div.classList.remove("like");
+        img_div.classList.remove("nope");
+
+        this.getImgPath(counter);
+        // console.log(this.state.imgPath);
+
+        const characterOnDisplay = this.state.characters[counter];
+        this.setState({
+          counter,
+          characterOnDisplay,
+        });
+      }, 1500);
+      // console.log("kolejna postać", counter, this.state.characters[counter]);
     } else {
       // console.log("brak postaci", counter, this.state.characters[counter]);
       alert("Brak postaci do wyświetlenia");
@@ -103,13 +119,23 @@ class App extends Component {
           imgPath={this.state.imgPath}
         />
         <div className="btns">
-          <button className="times" onClick={this.handleCharacterChange}>
+          <button
+            className="times"
+            onClick={() => {
+              this.handleCharacterChange("nope");
+            }}
+          >
             <FontAwesomeIcon
               icon={faTimes}
               style={{ width: 40, height: 40, color: "#EA6B4F" }}
             />
           </button>
-          <button className="heart" onClick={this.handleCharacterChange}>
+          <button
+            className="heart"
+            onClick={() => {
+              this.handleCharacterChange("like");
+            }}
+          >
             <FontAwesomeIcon
               icon={faHeart}
               style={{ width: 40, height: 40, color: "#76BF93" }}
