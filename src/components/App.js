@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import logo from "../assets/img/logo.png";
+// import logo from "../assets/img/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faHeart } from "@fortawesome/free-solid-svg-icons";
 
@@ -77,7 +77,7 @@ class App extends Component {
   };
 
   getImgPath = (counter) => {
-    const imgPath = `/images/${++counter}.jpg`;
+    const imgPath = `/assets/images/characters/${++counter}.jpg`;
 
     this.setState({
       imgPath,
@@ -96,7 +96,7 @@ class App extends Component {
     return (
       <main className="app">
         <div className="logo">
-          <img src={logo} alt="Star Wars logo" />
+          <img src="/assets/images/logo/logo.png" alt="Star Wars logo" />
         </div>
         <Card
           character={this.state.characterOnDisplay}
