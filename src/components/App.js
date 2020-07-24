@@ -1,17 +1,26 @@
+// TO DO
+// 1. znależź sposób, aby homeworld sie poprawnie wyswietlalo
+// 2. Zablokowac klikanie w kolejna postać gdy juz raz sie kliknelo
+// 3. Wyswietlenie matcha
+// 4. Wyświetlenie wszystkich matchy
+
 import React, { Component } from "react";
 // import logo from "../assets/img/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faHeart } from "@fortawesome/free-solid-svg-icons";
 
 import Card from "./Card";
+import Matches from "./Matches";
 
 class App extends Component {
   state = {
-    characters: [],
-    characterOnDisplay: "",
+    users: [],
+    likedUsers: [],
+    userOnDisplay: "",
     imgPath: "",
     counter: 0,
     error: "",
+    usersEnd: false,
   };
 
   getData = () => {
@@ -31,7 +40,7 @@ class App extends Component {
       .then((data) => {
         // Używamy części danych z API
         // data.results.map((person) => {
-        //   const character = {
+        //   const user = {
         //     name: person.name,
         //     height: person.height,
         //     mass: person.mass,
@@ -43,31 +52,46 @@ class App extends Component {
         //   };
 
         //   return this.setState((prevState) => ({
-        //     characters: [...prevState.characters, character],
+        //     users: [...prevState.users, user],
         //   }));
         // });
 
         //Używamy wszystkich danych z API
         this.setState((prevState) => ({
-          characters: [...prevState.characters, ...data.results],
-          characterOnDisplay: data.results[this.state.counter],
+          users: [...prevState.users, ...data.results],
+          userOnDisplay: data.results[this.state.counter],
         }));
       })
       .catch((error) => console.log(error));
   };
 
+  addLikedUser = (likedUser, imgPath) => {
+    const user = { likedUser: likedUser, imgPath: imgPath };
+    return this.setState((prevState) => ({
+      likedUsers: [...prevState.likedUsers, user],
+    }));
+  };
+
+  getImgPath = (counter) => {
+    const imgPath = `/assets/images/characters/${++counter}.jpg`;
+
+    this.setState({
+      imgPath,
+    });
+  };
+
   handleCharacterChange = (userInput) => {
     let counter = this.state.counter;
+    const prevUser = this.state.users[counter];
     counter++;
 
-    if (counter < this.state.characters.length) {
+    if (counter < this.state.users.length) {
       //Add like/nope animation
       const img_div = document.querySelector(".char-img");
       if (userInput === "like") {
-        console.log(img_div);
         img_div.classList.add("like");
+        this.addLikedUser(prevUser, this.state.imgPath);
       } else if (userInput === "nope") {
-        console.log(img_div);
         img_div.classList.add("nope");
       }
 
@@ -77,27 +101,21 @@ class App extends Component {
         img_div.classList.remove("nope");
 
         this.getImgPath(counter);
-        // console.log(this.state.imgPath);
 
-        const characterOnDisplay = this.state.characters[counter];
+        const userOnDisplay = this.state.users[counter];
         this.setState({
           counter,
-          characterOnDisplay,
+          userOnDisplay,
         });
-      }, 1500);
-      // console.log("kolejna postać", counter, this.state.characters[counter]);
+      }, 800);
+      // console.log("kolejna postać", counter, this.state.users[counter]);
     } else {
-      // console.log("brak postaci", counter, this.state.characters[counter]);
+      // console.log("brak postaci", counter, this.state.users[counter]);
       alert("Brak postaci do wyświetlenia");
+      this.setState({
+        usersEnd: true,
+      });
     }
-  };
-
-  getImgPath = (counter) => {
-    const imgPath = `/assets/images/characters/${++counter}.jpg`;
-
-    this.setState({
-      imgPath,
-    });
   };
 
   componentWillMount() {
@@ -114,10 +132,14 @@ class App extends Component {
         <div className="logo">
           <img src="/assets/images/logo/logo.png" alt="Star Wars logo" />
         </div>
-        <Card
-          character={this.state.characterOnDisplay}
-          imgPath={this.state.imgPath}
-        />
+        {this.state.usersEnd ? (
+          <Matches likedUsers={this.state.likedUsers} />
+        ) : (
+          <Card user={this.state.userOnDisplay} imgPath={this.state.imgPath} />
+        )}
+
+        {/* <Matches likedUsers={this.state.likedUsers} /> */}
+
         <div className="btns">
           <button
             className="times"
