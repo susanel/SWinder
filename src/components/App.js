@@ -9,6 +9,7 @@ class App extends Component {
   state = {
     characters: [],
     characterOnDisplay: "",
+    imgPath: "",
     counter: 0,
     error: "",
   };
@@ -61,6 +62,9 @@ class App extends Component {
 
     if (counter < this.state.characters.length) {
       // console.log("kolejna postać", counter, this.state.characters[counter]);
+      this.getImgPath(counter);
+      // console.log(this.state.imgPath);
+
       const characterOnDisplay = this.state.characters[counter];
       this.setState({
         counter,
@@ -72,6 +76,18 @@ class App extends Component {
     }
   };
 
+  getImgPath = (counter) => {
+    const imgPath = `/images/${++counter}.jpg`;
+
+    this.setState({
+      imgPath,
+    });
+  };
+
+  componentWillMount() {
+    this.getImgPath(0);
+  }
+
   componentDidMount() {
     this.getData();
   }
@@ -82,7 +98,10 @@ class App extends Component {
         <div className="logo">
           <img src={logo} alt="Star Wars logo" />
         </div>
-        <Card character={this.state.characterOnDisplay} />
+        <Card
+          character={this.state.characterOnDisplay}
+          imgPath={this.state.imgPath}
+        />
         <div className="btns">
           <button className="times" onClick={this.handleCharacterChange}>
             <FontAwesomeIcon

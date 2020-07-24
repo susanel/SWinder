@@ -1,7 +1,6 @@
 import React from "react";
-import characterImg from "../assets/characters/1.jpg";
 
-const characterMessage = [
+const characterMessages = [
   "I have a big lightsaber and know how to use it...",
   "Have been looking for love in Alderaan places.",
   "Open-minded and wanting to explore",
@@ -18,36 +17,34 @@ const AboutCharacterInfo = ({ character }) => {
   ];
 
   const info_divs = characterFeatures.map((item, i) => (
-    <div className="more-info" key={i}>
+    <div key={i}>
       <strong>{item.title} : </strong>
       {item.feature}
     </div>
   ));
 
   const getMessage = () => {
-    const number = Math.floor(Math.random() * characterMessage.length);
-    const message = characterMessage[number];
+    const number = Math.floor(Math.random() * characterMessages.length);
+    const message = characterMessages[number];
     return message;
   };
 
   return (
     <div className="about">
       <p>{getMessage()}</p>
-      {info_divs}
+      <div className="more-info">{info_divs}</div>
     </div>
   );
 };
 
-const Card = ({ character }) => {
+const Card = ({ character, imgPath }) => {
   const getRandomNumber = (unit) => {
     const numberKm = Math.floor(Math.random() * 21);
     const numberMin = Math.floor(Math.random() * 60);
 
     if (unit === "km") {
-      console.log(unit);
       return numberKm;
     } else if (unit === "min") {
-      console.log(unit);
       return numberMin;
     }
   };
@@ -56,7 +53,7 @@ const Card = ({ character }) => {
     <div className="card-wrapper">
       <div className="card">
         <div className="char-img">
-          <img src={characterImg} alt="" />
+          <img src={imgPath} alt="" />
         </div>
         <div className="info">
           <div className="short-info">
