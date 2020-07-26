@@ -12,7 +12,7 @@ import { faTimes, faHeart } from "@fortawesome/free-solid-svg-icons";
 import Card from "./Card";
 import Matches from "./Matches";
 
-const Buttons = ({ handleCharacterChange }) => {
+const Buttons = ({ handleCharacterChange, isButtonDisabled }) => {
   const btns = [
     {
       className: "times",
@@ -32,7 +32,9 @@ const Buttons = ({ handleCharacterChange }) => {
     <div className="btns">
       {btns.map((btn, index) => (
         <button
+          key={index}
           className={btn.className}
+          disabled={isButtonDisabled}
           onClick={() => {
             handleCharacterChange(btn.matchText);
           }}
@@ -53,6 +55,7 @@ class App extends Component {
     counter: 0,
     error: "",
     usersEnd: false,
+    isButtonDisabled: false,
   };
 
   getData = () => {
@@ -105,6 +108,7 @@ class App extends Component {
   };
 
   getImgPath = (counter) => {
+    // const imgPath = `/assets/images/characters/${++counter}.jpg`;
     const imgPath = `/assets/images/characters/${++counter}.jpg`;
 
     this.setState({
@@ -116,8 +120,13 @@ class App extends Component {
     let counter = this.state.counter;
     const prevUser = this.state.users[counter];
     counter++;
+    console.log("klik!");
 
-    if (counter < this.state.users.length) {
+    if (counter < this.state.users.length && !this.state.isButtonDisabled) {
+      this.setState({
+        isButtonDisabled: true,
+      });
+
       //Add like/nope animation
       const img_div = document.querySelector(".char-img");
       if (userInput === "like") {
@@ -138,6 +147,7 @@ class App extends Component {
         this.setState({
           counter,
           userOnDisplay,
+          isButtonDisabled: false,
         });
       }, 800);
       // console.log("kolejna postać", counter, this.state.users[counter]);
@@ -172,7 +182,10 @@ class App extends Component {
               user={this.state.userOnDisplay}
               imgPath={this.state.imgPath}
             />
-            <Buttons handleCharacterChange={this.handleCharacterChange} />
+            <Buttons
+              handleCharacterChange={this.handleCharacterChange}
+              isButtonDisabled={this.state.isButtonDisabled}
+            />
           </>
         )}
       </main>
