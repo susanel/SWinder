@@ -1,6 +1,10 @@
 // FONTS
 // font-family: 'Montserrat', sans-serif;
 // font-weight: 400, 700;
+// @import space from ""../../public/assets/images/background/space-1280x720.png""
+body
+  background: url(../assets/images/background/space-1280x720.png)
+
   
 .app
   max-width: 1200px
@@ -9,26 +13,35 @@
   margin: 3% auto
   display: flex
   flex-direction: column
+  background-color: transparent
+  align-items: center
   
   .logo
     margin: 20px
-    text-align: center
+    // text-align: center
+    background-color: #f5f5f5
+    padding: 10px 30px
+    // border-style: solid
+    // border-width: 10px 30px 10px 30px
+    // border-color: transparent red blue green
 
   .card-wrapper
     flex-grow: 1
-    padding: 20px
+    padding: 10px
     background-color: pink
-    // background: img("../img/space-1920x1080.png")
-    position: relative
+    // background: url(../assets/images/background/space-1280x720.png)
+    // position: relative
+    width: 100%
 
     .card
       background-color: #f5f5f5
-      width: 500px
+      width: 400px
       // min-height: 600px
+      margin: 0 auto
       padding: 8px
       border-radius: 10px
       // max-width
-      +position-center()
+      // +position-center()
       .char-img
         position: relative
         width: 100%
@@ -39,7 +52,7 @@
         transsition: .2s //nie dziala
         img
           width: 100%
-          +position-center()
+          // +position-center()
           // max-height: 100%
         &.like::after
           content: "like"
@@ -75,12 +88,18 @@
           color: #828282
           font-size: 1.8rem
           .more-info
-            margin-top: 20px
+            margin-top: 30px
             line-height: 140%
+            p
+              margin-bottom: 16px
+              font-size: 2.6rem
+              text-decoration: underline
 
   .btns
     flex-basis: 100px
     text-align: center
+    background-color: #555
+
     button
       width: 80px
       height: 80px
@@ -109,14 +128,15 @@
         h2
           padding: 8px
         .liked-char-img
-          height: 280px
+          height: 200px
           position: relative
           overflow: hidden
           border-radius: 10px
           margin-bottom: 6px
           img
             width: 100%
-            min-height: 100%
+            height: auto
+            // min-height: 100%
             +position-center()
 
 

@@ -1,12 +1,6 @@
 import React from "react";
 
-const characterMessages = [
-  "I have a big lightsaber and know how to use it...",
-  "Have been looking for love in Alderaan places.",
-  "Open-minded and wanting to explore",
-];
-
-const AboutUserInfo = ({ user }) => {
+const AboutUserInfo = ({ user, message }) => {
   const characterFeatures = [
     { title: "gender", feature: user.gender },
     { title: "homeworld", feature: user.homeworld },
@@ -23,15 +17,9 @@ const AboutUserInfo = ({ user }) => {
     </div>
   ));
 
-  const getMessage = () => {
-    const number = Math.floor(Math.random() * characterMessages.length);
-    const message = characterMessages[number];
-    return message;
-  };
-
   return (
     <div className="about">
-      <p>{getMessage()}</p>
+      <p>{message}</p>
       <div className="more-info">
         <p>Details:</p>
         {info_divs}
@@ -40,33 +28,25 @@ const AboutUserInfo = ({ user }) => {
   );
 };
 
-const Card = ({ user, imgPath }) => {
-  const getRandomNumber = (unit) => {
-    const numberKm = Math.floor(Math.random() * 21);
-    const numberMin = Math.floor(Math.random() * 60);
-
-    if (unit === "km") {
-      return numberKm;
-    } else if (unit === "min") {
-      return numberMin;
-    }
-  };
+const Card = ({ nextUser, nextUserLogInfo }) => {
+  // console.log(nextUser.name);
+  // console.log(nextUserLogInfo.imgPath);
 
   return (
     <div className="card-wrapper">
       <div className="card">
         <div className="char-img">
-          <img src={imgPath} alt="" />
+          <img src={nextUserLogInfo.imgPath} alt="" />
         </div>
         <div className="info">
           <div className="short-info">
-            <span>{user.name}</span>, <span>23</span>
+            <span>{nextUser.name}</span>, <span>23</span>
           </div>
           <div className="log-info">
-            <span>{getRandomNumber("km")} kilometers away</span>
-            <span> Active: {getRandomNumber("min")} minutes ago</span>
+            <span>{nextUserLogInfo.numberKm} kilometers away</span>
+            <span> Active: {nextUserLogInfo.numberMin} minutes ago</span>
           </div>
-          <AboutUserInfo user={user} />
+          <AboutUserInfo user={nextUser} message={nextUserLogInfo.message} />
         </div>
       </div>
     </div>
