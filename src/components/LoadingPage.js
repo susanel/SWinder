@@ -1,6 +1,6 @@
 import React from "react";
 
-const LoadingComponent = () => {
+const LoadingPage = () => {
   return (
     <div className="loading">
       <div className="image-container">
@@ -11,4 +11,4 @@ const LoadingComponent = () => {
   );
 };
 
-export default LoadingComponent;
+export default LoadingPage;
