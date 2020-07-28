@@ -1,58 +1,23 @@
 // TO DO
 // 1. znależź sposób, aby homeworld sie poprawnie wyswietlalo
-// 2. Zablokowac klikanie w kolejna postać gdy juz raz sie kliknelo
+// 2. Zablokowac klikanie w kolejna postać gdy juz raz sie kliknelo //done
 // 3. Wyswietlenie matcha
-// 4. Wyświetlenie wszystkich matchy
+// 4. Wyświetlenie wszystkich matchy //done
 // 5. Obrazki powinno si trzymac w /src - jes to dobra praktyka, znalezc na to sposob bo na razie nei wiem jaka podac sciezke
+// 6. Pokazywanie 10 matchy, nastepne na kolejnej stronie
 
 import React, { Component } from "react";
-// import logo from "../assets/img/logo.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes, faHeart } from "@fortawesome/free-solid-svg-icons";
 
-import Card from "./Card";
-import Matches from "./Matches";
-import LoadingComponent from "./LoadingComponent";
+import CardSection from "./CardSection";
+import ControlSection from "./ControlSection";
+import MatchesPage from "./MatchesPage";
+import LoadingPage from "./LoadingPage";
 
 const characterMessages = [
   "I have a big lightsaber and know how to use it...",
   "Have been looking for love in Alderaan places.",
   "Open-minded and wanting to explore",
 ];
-
-const Buttons = ({ handleNextUser, isButtonDisabled }) => {
-  const btns = [
-    {
-      className: "times",
-      matchText: "nope",
-      icon: faTimes,
-      style: { width: 40, height: 40, color: "#EA6B4F" },
-    },
-    {
-      classname: "heart",
-      matchText: "like",
-      icon: faHeart,
-      style: { width: 40, height: 40, color: "#76BF93" },
-    },
-  ];
-
-  return (
-    <div className="btns">
-      {btns.map((btn, index) => (
-        <button
-          key={index}
-          className={btn.className}
-          disabled={isButtonDisabled}
-          onClick={() => {
-            handleNextUser(btn.matchText);
-          }}
-        >
-          <FontAwesomeIcon icon={btn.icon} style={btn.style} />
-        </button>
-      ))}
-    </div>
-  );
-};
 
 class App extends Component {
   state = {
@@ -62,7 +27,7 @@ class App extends Component {
     nextUserLogInfo: {},
     counter: 0,
     error: "",
-    usersEnd: false,
+    showMatches: false,
     isButtonDisabled: false,
     isLoaded: false,
   };
@@ -112,9 +77,11 @@ class App extends Component {
           this.getData(data.next);
         } else {
           console.log("No more data to get --- ", data.next);
-          this.setState({
-            isLoaded: true,
-          });
+          setTimeout(() => {
+            this.setState({
+              isLoaded: true,
+            });
+          }, 0); //6000
         }
       })
       .catch((error) => console.log(error));
@@ -127,6 +94,7 @@ class App extends Component {
       likedUser: users[counter],
       imgPath: nextUserLogInfo.imgPath,
     };
+
     return this.setState((prevState) => ({
       likedUsers: [...prevState.likedUsers, user],
     }));
@@ -157,7 +125,7 @@ class App extends Component {
   handleNextUser = (isMatch) => {
     const { users } = this.state;
 
-    const img_div = document.querySelector(".char-img");
+    const img_div = document.querySelector(".image-container");
 
     if (isMatch === "like") {
       img_div.classList.add("like");
@@ -190,11 +158,14 @@ class App extends Component {
       } else {
         // console.log("brak postaci", counter, this.state.users[counter]);
         alert("Brak postaci do wyświetlenia");
-        this.setState({
-          usersEnd: true,
-        });
       }
     }, 800);
+  };
+
+  handleShowMatches = () => {
+    this.setState({
+      showMatches: !this.state.showMatches,
+    });
   };
 
   componentDidMount() {
@@ -204,7 +175,7 @@ class App extends Component {
   render() {
     const {
       // users,
-      usersEnd,
+      showMatches,
       nextUser,
       nextUserLogInfo,
       isButtonDisabled,
@@ -216,23 +187,27 @@ class App extends Component {
       <>
         {isLoaded ? (
           <main className="app">
-            <div className="logo">
-              <img src="/assets/images/logo/logo.png" alt="Star Wars logo" />
-            </div>
-            {usersEnd ? (
-              <Matches likedUsers={likedUsers} />
+            {showMatches ? (
+              <MatchesPage
+                likedUsers={likedUsers}
+                handleShowMatches={this.handleShowMatches}
+              />
             ) : (
               <>
-                <Card nextUser={nextUser} nextUserLogInfo={nextUserLogInfo} />
-                <Buttons
+                <CardSection
+                  nextUser={nextUser}
+                  nextUserLogInfo={nextUserLogInfo}
+                />
+                <ControlSection
                   handleNextUser={this.handleNextUser}
+                  handleShowMatches={this.handleShowMatches}
                   isButtonDisabled={isButtonDisabled}
                 />
               </>
             )}
           </main>
         ) : (
-          <LoadingComponent />
+          <LoadingPage />
         )}
       </>
     );
