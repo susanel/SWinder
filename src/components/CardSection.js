@@ -10,7 +10,6 @@ const AboutUserInfo = ({ user, nextUserLogInfo, isActive }) => {
 
   const characterFeatures = [
     { title: "gender", feature: user.gender },
-    // { title: "homeworld", feature: user.homeworld },
     { title: "height", feature: user.height },
     { title: "weight", feature: user.mass },
     { title: "hair color", feature: user.hair_color },
@@ -75,9 +74,6 @@ class CardSection extends React.Component {
               />
             </button>
           </div>
-          {/* {this.state.isActive ? (
-            <AboutUserInfo user={nextUser} nextUserLogInfo={nextUserLogInfo} />
-          ) : null} */}
           <AboutUserInfo
             isActive={this.state.isActive}
             user={nextUser}
