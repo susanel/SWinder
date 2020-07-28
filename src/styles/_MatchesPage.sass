@@ -1,0 +1,62 @@
+.matches-container
+  width: 100%
+  padding: 20px
+  color: $white
+  .logo
+    position: relative
+    margin-bottom: 40px
+    text-align: center   
+    button
+      position: absolute
+      top: 50%
+      left: 10px
+      transform: translateY(-50%)
+      background-color: transparent
+      box-shadow: 0 0 5px 2px $yellow
+      &:hover
+        box-shadow: 0 0 5px 5px $yellow
+  .matches
+    display: flex
+    flex-wrap: wrap
+    padding: 20px
+    box-shadow: 0 0 10px 2px $white
+    border-radius: 5px
+    h1
+      flex-basis: 100%
+      margin-bottom: 20px
+      text-align: center
+      font-size: 4.2rem
+    .match
+      position: relative
+      flex-basis: 18%
+      margin: 8px 1% 8px
+      .image-container
+        position: relative
+        height: 240px
+        margin-bottom: 6px
+        border-radius: 10px
+        overflow: hidden
+        transition: .4s
+        img
+          width: 100%
+          min-height: 100%
+          +position-center()
+        &:hover
+          transform: scale(1.1)
+          filter: brightness(1.2)
+      h2
+        position: absolute
+        bottom: 5%
+        left: 5%
+    .no-matches
+      padding: 50px
+      font-size: 1.8rem
+      margin: 0 auto
+      text-align: center
+      p
+        line-height: 150%
+
+
+
+      
+      
