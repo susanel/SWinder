@@ -4,5 +4,47 @@
   width: 90%
   margin: 5vh 5%
   background-color: rgba(0,0,0,.7)
-  .spinner
+  p
+    position: absolute
+    top: 80%
+    left: 50%
+    transform: translateX(-50%)
+    font-size: 1.6rem
+    color: $white
+    text-align: center
+    letter-spacing: 1px
+  .image-container
+    width: 150px
+    height: 150px
+    border: 3px solid white
+    border-radius: 50%
+    overflow: hidden
+    z-index: 2
     +position-center()
+    img
+      width: 100%   
+  &::after,&::before
+    content: ""
+    display: block
+    border-radius: 50%
+    z-index: 1
+    +position-center
+  &::before
+    animation: pulsing infinite 4s linear
+  &::after
+    animation: pulsing infinite 4s linear 2s
+    
+@keyframes pulsing
+  0%
+    width: 100px
+    height: 100px
+    background-color: rgba(241, 196, 15, 0.8)
+    border: 3px solid rgba(241, 196, 15, 1)
+  70%
+    background-color: rgba(241, 196, 15, .2)
+    border: 3px solid rgba(241, 196, 15, .3)
+  100%
+    width: 400px
+    height: 400px
+    background-color: rgba(241, 196, 15, 0)
+    border: 3px solid rgba(241, 196, 15, 0)
