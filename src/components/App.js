@@ -72,13 +72,16 @@ class App extends Component {
         });
 
         if (data.next) {
-          this.getData(data.next);
+          //SWAPI delivers HTTP instead of HTTPS link that results with Mixed Content Error in browser, so I've replaced the link url
+          let newAPI = data.next;
+          newAPI = newAPI.replace("http", "https");
+          this.getData(newAPI);
         } else {
           setTimeout(() => {
             this.setState({
               isLoaded: true,
             });
-          }, 0); //6000
+          }, 6000);
         }
       })
       .catch((error) => console.log(error));

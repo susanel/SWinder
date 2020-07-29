@@ -49,9 +49,6 @@ class CardSection extends React.Component {
 
   render() {
     const { nextUser, nextUserLogInfo } = this.props;
-    // console.log(process.env.PUBLIC_URL + "../1.jpg");
-    console.log(nextUserLogInfo);
-    console.log(nextUser);
 
     return (
       <section className="card">
