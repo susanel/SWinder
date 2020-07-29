@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/SWinder/precache-manifest.decb6401364718d6b66dbe5c147b021e.js"
+  "/SWinder/precache-manifest.6716d010351c32d2d3bbd9a3361f5b77.js"
 );
 
 self.addEventListener('message', (event) => {
