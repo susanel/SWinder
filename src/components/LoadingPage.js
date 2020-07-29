@@ -1,10 +1,11 @@
 import React from "react";
+import img from "../assets/images/characters/kylo.jpg";
 
 const LoadingPage = () => {
   return (
     <div className="loading">
       <div className="image-container">
-        <img src="/assets/images/characters/kylo.jpg" alt="Kylo Ren" />
+        <img src={img} alt="Kylo Ren" />
       </div>
       <p>Looking for potential matches in your Universe</p>
     </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFireAlt, faInfo } from "@fortawesome/free-solid-svg-icons";
+import logo from "../assets/images/logo/logo.png";
 
 const AboutUserInfo = ({ user, nextUserLogInfo, isActive }) => {
   const componentClasses = ["about"];
@@ -48,6 +49,10 @@ class CardSection extends React.Component {
 
   render() {
     const { nextUser, nextUserLogInfo } = this.props;
+    // console.log(process.env.PUBLIC_URL + "../1.jpg");
+    console.log(nextUserLogInfo);
+    console.log(nextUser);
+
     return (
       <section className="card">
         <header className="logo">
@@ -57,11 +62,14 @@ class CardSection extends React.Component {
             size="5x"
             color="#F1C40F"
           />
-          <img src="/assets/images/logo/logo.png" alt="Swinder logo" />
+          <img src={logo} alt="Swinder logo" />
         </header>
         <div className="person">
           <div className="image-container">
-            <img src={nextUserLogInfo.imgPath} alt="Character profile" />
+            <img
+              src={process.env.PUBLIC_URL + nextUserLogInfo.imgPath}
+              alt={nextUser.name}
+            />
           </div>
           <div className="username">
             <strong>{nextUser.name}</strong>

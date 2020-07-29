@@ -1,12 +1,13 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
+import logo2 from "../assets/images/logo/logo65px.png";
 
 const Match = ({ imgPath, user }) => {
   return (
     <div className="match">
       <div className="image-container">
-        <img src={imgPath} alt="user" />
+        <img src={process.env.PUBLIC_URL + imgPath} alt="user" />
       </div>
       <h2>{user.name}</h2>
     </div>
@@ -35,7 +36,7 @@ const MatchesPage = ({ likedUsers, handleShowMatches }) => {
               style={{ width: 50, height: 40, color: "F1C40F" }}
             />
           </button>
-          <img src="/assets/images/logo/logo65px.png" alt="Swinder logo" />
+          <img src={logo2} alt="Swinder logo" />
         </div>
 
         <div className="matches">

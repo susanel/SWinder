@@ -78,7 +78,7 @@ class App extends Component {
             this.setState({
               isLoaded: true,
             });
-          }, 6000);
+          }, 0); //6000
         }
       })
       .catch((error) => console.log(error));
