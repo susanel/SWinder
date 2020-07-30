@@ -24,11 +24,25 @@ const AboutUserInfo = ({ user, isActive }) => {
     </div>
   ));
 
+  const style = {
+    marginRight: 8,
+    width: 18,
+    height: 18,
+    verticalAlign: "middle",
+    color: "#aaa",
+  };
+
   return (
     <div className={componentClasses.join(" ")}>
       <div className="log-info">
-        <span>{user.numberKm} kilometers away</span>
-        <span> Active: {user.numberMin} minutes ago</span>
+        <div>
+          <FontAwesomeIcon icon="map-marker-alt" style={style} />
+          {user.numberKm} kilometers away
+        </div>
+        <div>
+          <FontAwesomeIcon icon="clock" style={style} />
+          Active: {user.numberMin} minutes ago
+        </div>
       </div>
       <div className="pickup-line">
         <p>{user.message}</p>
