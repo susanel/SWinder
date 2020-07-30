@@ -61,7 +61,7 @@ class CardSection extends React.Component {
           />
           <img src={logo} alt="Swinder logo" />
         </header>
-        <div className="person">
+        <article className="person">
           <div className="image-container">
             <img
               src={process.env.PUBLIC_URL + nextUserLogInfo.imgPath}
@@ -70,12 +70,12 @@ class CardSection extends React.Component {
           </div>
           <div className="username">
             <strong>{nextUser.name}</strong>
-            <span>23</span>
+            <span>{nextUser.birth_year}</span>
             <button onClick={this.handleShowUserInfo}>
               <FontAwesomeIcon
                 className="info-icon"
                 icon={faInfo}
-                style={{ fontSize: 20 }}
+                style={{ fontSize: 22 }}
               />
             </button>
           </div>
@@ -84,7 +84,7 @@ class CardSection extends React.Component {
             user={nextUser}
             nextUserLogInfo={nextUserLogInfo}
           />
-        </div>
+        </article>
       </section>
     );
   }

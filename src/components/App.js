@@ -50,6 +50,7 @@ class App extends Component {
           const user = {
             name: person.name,
             height: person.height,
+            birth_year: person.birth_year,
             mass: person.mass,
             hair_color: person.hair_color,
             eye_color: person.eye_color,
@@ -76,6 +77,7 @@ class App extends Component {
           let newAPI = data.next;
           newAPI = newAPI.replace("http", "https");
           this.getData(newAPI);
+          console.log(data.next);
         } else {
           setTimeout(() => {
             this.setState({
@@ -185,7 +187,7 @@ class App extends Component {
                 handleShowMatches={this.handleShowMatches}
               />
             ) : (
-              <>
+              <div className="card-wrap">
                 <CardSection
                   nextUser={nextUser}
                   nextUserLogInfo={nextUserLogInfo}
@@ -195,7 +197,7 @@ class App extends Component {
                   handleShowMatches={this.handleShowMatches}
                   isButtonDisabled={isButtonDisabled}
                 />
-              </>
+              </div>
             )}
           </main>
         ) : (
