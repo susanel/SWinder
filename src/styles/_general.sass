@@ -2,6 +2,8 @@
 // font-family: 'Montserrat', sans-serif;
 // font-weight: 400, 700;
 
+/*! GENERAL */
+
 *, ::before,::after
   margin: 0
   padding: 0
@@ -15,19 +17,28 @@ body
   min-height: 100vh
   padding: 5vh
   background: url(../assets/images/background/space-1280x720.png)
-  background-size: cover
-  background-repeat: no-repeat
 
 .app
+  max-width: 1200px
+  width: 100%
+  margin: 0 auto
+  background-color: $sheer-black
+
+.card-wrap
+  width: 100%
   display: flex
   flex-direction: column
   align-items: center
-  max-width: 1200px
-  margin: 0 auto
-  background-color: $sheer-black
 
 // BUTTONS 
 button
   cursor: pointer
   outline: none
   border: none
+
+@media (max-width:1280px)
+  background: url(../assets/images/background/space-1280x720.png)
+
+@media (max-width:640px)
+  background: url(../assets/images/background/space-640x360.png)
+

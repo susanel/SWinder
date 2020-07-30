@@ -1,7 +1,8 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFireAlt, faInfo } from "@fortawesome/free-solid-svg-icons";
-import logo from "../assets/images/logo/logo.png";
+import logo_sm from "../assets/images/logo/logo26px.png";
+import logo_md from "../assets/images/logo/logo.png";
 
 const AboutUserInfo = ({ user, nextUserLogInfo, isActive }) => {
   const componentClasses = ["about"];
@@ -48,7 +49,7 @@ class CardSection extends React.Component {
   };
 
   render() {
-    const { nextUser, nextUserLogInfo } = this.props;
+    const { nextUser, nextUserLogInfo, isMobile } = this.props;
 
     return (
       <section className="card">
@@ -56,10 +57,10 @@ class CardSection extends React.Component {
           <FontAwesomeIcon
             className="swinder-icon"
             icon={faFireAlt}
-            size="5x"
+            size={isMobile ? "3x" : "5x"}
             color="#F1C40F"
           />
-          <img src={logo} alt="Swinder logo" />
+          <img src={isMobile ? logo_sm : logo_md} alt="Swinder logo" />
         </header>
         <article className="person">
           <div className="image-container">
@@ -70,7 +71,9 @@ class CardSection extends React.Component {
           </div>
           <div className="username">
             <strong>{nextUser.name}</strong>
-            <span>{nextUser.birth_year}</span>
+            <span>
+              {nextUser.birth_year !== "unknown" ? nextUser.birth_year : null}
+            </span>
             <button onClick={this.handleShowUserInfo}>
               <FontAwesomeIcon
                 className="info-icon"

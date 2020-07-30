@@ -10,28 +10,29 @@ const ControlSection = ({
   handleNextUser,
   handleShowMatches,
   isButtonDisabled,
+  isMobile,
 }) => {
   const btns = [
     {
       className: "times",
       matchText: "nope",
       icon: faTimes,
-      style: { width: 40, height: 40, color: "#EA6B4F" },
+      style: isMobile
+        ? { width: 34, height: 34, color: "#EA6B4F" }
+        : { width: 40, height: 40, color: "#EA6B4F" },
     },
     {
       className: "heart",
       matchText: "like",
       icon: faHeart,
-      style: {
-        width: 40,
-        height: 40,
-        color: "#76BF93",
-      },
+      style: isMobile
+        ? { width: 34, height: 34, color: "#76BF93" }
+        : { width: 40, height: 40, color: "#76BF93" },
     },
   ];
 
   return (
-    <div className="btns">
+    <section className="btns">
       {btns.map((btn, index) => (
         <button
           key={index}
@@ -55,7 +56,7 @@ const ControlSection = ({
           }}
         />
       </button>
-    </div>
+    </section>
   );
 };
 

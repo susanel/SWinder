@@ -1,15 +1,15 @@
+/*! MATCHES PAGE */
+
 .matches-container
   width: 100%
-  padding: 20px
   color: $white
   .logo
     position: relative
-    margin-bottom: 40px
+    margin: 20px 0 40px
     text-align: center   
+    // background-color: pink
     button
-      position: absolute
-      top: 50%
-      left: 10px
+      +pos(absolute,50%,null,null,10px)
       transform: translateY(-50%)
       background-color: transparent
       box-shadow: 0 0 5px 2px $yellow
@@ -18,6 +18,7 @@
   .matches
     display: flex
     flex-wrap: wrap
+    width: 100%
     padding: 20px
     box-shadow: 0 0 10px 2px $white
     border-radius: 5px
@@ -28,35 +29,61 @@
       font-size: 4.2rem
     .match
       position: relative
-      flex-basis: 18%
+      flex-basis: 23%
       margin: 8px 1% 8px
       .image-container
         position: relative
-        height: 240px
-        margin-bottom: 6px
+        min-height: 230px
         border-radius: 10px
         overflow: hidden
         transition: .4s
         img
+          +position_center()
           width: 100%
-          min-height: 100%
-          +position-center()
+          height: auto
         &:hover
           transform: scale(1.1)
           filter: brightness(1.2)
       h2
-        position: absolute
-        bottom: 5%
-        left: 5%
+        +pos(absolute,null,null,5%,5%)
     .no-matches
       padding: 50px
-      font-size: 1.8rem
       margin: 0 auto
+      font-size: 1.8rem
       text-align: center
       p
         line-height: 150%
 
 
-
-      
-      
+@media (max-width: 767px)
+  .matches-container
+    .logo
+      margin: 10px 0 20px
+      button
+        left: 0
+    .matches
+      padding: 10px
+      h1
+        margin-bottom: 10px
+        font-size: 3rem
+      .match
+        flex-basis: 31%
+        margin: 8px 1%
+        .image-container
+          min-height: 200px
+  
+@media (max-width: 532px)
+  .matches-container
+    .logo
+      padding-top: 50px
+      margin-top: 0
+      button
+        +pos(absolute,0,null,null,0)
+        transform: translateY(0)
+    .matches
+      h1
+        font-size: 2.6rem
+      .match
+        flex-basis: 48%
+        .image-container
+          min-height: 150px

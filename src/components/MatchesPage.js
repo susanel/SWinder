@@ -1,7 +1,8 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
-import logo2 from "../assets/images/logo/logo65px.png";
+import logo2_sm from "../assets/images/logo/logo28px.png";
+import logo2_md from "../assets/images/logo/logo65px.png";
 
 const Match = ({ imgPath, user }) => {
   return (
@@ -14,7 +15,7 @@ const Match = ({ imgPath, user }) => {
   );
 };
 
-const MatchesPage = ({ likedUsers, handleShowMatches }) => {
+const MatchesPage = ({ likedUsers, handleShowMatches, isMobile }) => {
   const users = likedUsers.map((user, i) => (
     <Match key={i} imgPath={user.imgPath} user={user.likedUser} />
   ));
@@ -26,17 +27,18 @@ const MatchesPage = ({ likedUsers, handleShowMatches }) => {
     </div>
   );
 
+  const style = isMobile
+    ? { width: 40, height: 30, color: "F1C40F" }
+    : { width: 50, height: 40, color: "F1C40F" };
+
   return (
     <>
       <div className="matches-container">
         <div className="logo">
           <button onClick={handleShowMatches}>
-            <FontAwesomeIcon
-              icon={faLongArrowAltLeft}
-              style={{ width: 50, height: 40, color: "F1C40F" }}
-            />
+            <FontAwesomeIcon icon={faLongArrowAltLeft} style={style} />
           </button>
-          <img src={logo2} alt="Swinder logo" />
+          <img src={isMobile ? logo2_sm : logo2_md} alt="Swinder logo" />
         </div>
 
         <div className="matches">

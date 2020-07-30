@@ -1,5 +1,22 @@
-=position-center()
+=position_center()
   position: absolute
   top: 50%
   left: 50%
   transform: translate(-50%,-50%)
+
+=pos($position, $top:null, $right:null, $bottom:null, $left:null)
+  position: $position
+  top: $top
+  right: $right
+  bottom: $bottom
+  left: $left
+
+=pseudo($content: "",$pos: absolute, $display: block)
+  content: $content
+  display: $display
+  position: $pos
+
+=circle($size)
+  width: $size
+  height: $size
+  border-radius: 50%

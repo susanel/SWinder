@@ -6,7 +6,6 @@
 // 5. Obrazki powinno si trzymac w /src - jes to dobra praktyka, znalezc na to sposob bo na razie nei wiem jaka podac sciezke (+ background w  SaSS pobiera plik z /src, a <img> z Reacta pobiera z /public)
 // 6. Pokazywanie 10 matchy, nastepne na kolejnej stronie
 // 7. Ewentualnie wyświetlac jeszcze gatunek
-// 8. Wyświetlać randomowo wiek użytkownika
 
 import React, { Component } from "react";
 
@@ -31,6 +30,7 @@ class App extends Component {
     showMatches: false,
     isButtonDisabled: false,
     isLoaded: false,
+    isMobile: false,
   };
 
   getData = (API = `https://swapi.dev/api/people/`) => {
@@ -163,8 +163,26 @@ class App extends Component {
     });
   };
 
+  handleWindowResize = () => {
+    if (window.innerWidth < 768 && !this.state.isMobile) {
+      this.setState({
+        isMobile: true,
+      });
+    } else if (window.innerWidth >= 768 && this.state.isMobile) {
+      this.setState({
+        isMobile: false,
+      });
+    }
+  };
+
   componentDidMount() {
     this.getData();
+    this.handleWindowResize();
+    window.addEventListener("resize", this.handleWindowResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleWindowResize);
   }
 
   render() {
@@ -175,6 +193,7 @@ class App extends Component {
       isButtonDisabled,
       likedUsers,
       isLoaded,
+      isMobile,
     } = this.state;
 
     return (
@@ -185,17 +204,20 @@ class App extends Component {
               <MatchesPage
                 likedUsers={likedUsers}
                 handleShowMatches={this.handleShowMatches}
+                isMobile={isMobile}
               />
             ) : (
               <div className="card-wrap">
                 <CardSection
                   nextUser={nextUser}
                   nextUserLogInfo={nextUserLogInfo}
+                  isMobile={isMobile}
                 />
                 <ControlSection
                   handleNextUser={this.handleNextUser}
                   handleShowMatches={this.handleShowMatches}
                   isButtonDisabled={isButtonDisabled}
+                  isMobile={isMobile}
                 />
               </div>
             )}
