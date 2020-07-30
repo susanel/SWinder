@@ -1,6 +1,5 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
 import logo2_sm from "../assets/images/logo/logo28px.png";
 import logo2_md from "../assets/images/logo/logo65px.png";
 
@@ -36,7 +35,7 @@ const MatchesPage = ({ likedUsers, handleShowMatches, isMobile }) => {
       <div className="matches-container">
         <div className="logo">
           <button onClick={handleShowMatches}>
-            <FontAwesomeIcon icon={faLongArrowAltLeft} style={style} />
+            <FontAwesomeIcon icon="long-arrow-alt-left" style={style} />
           </button>
           <img src={isMobile ? logo2_sm : logo2_md} alt="Swinder logo" />
         </div>

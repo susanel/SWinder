@@ -1,0 +1,22 @@
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faMapMarkerAlt,
+  faClock,
+  faFireAlt,
+  faInfo,
+  faTimes,
+  faHeart,
+  faUserFriends,
+  faLongArrowAltLeft,
+} from "@fortawesome/free-solid-svg-icons";
+
+library.add(
+  faMapMarkerAlt,
+  faClock,
+  faFireAlt,
+  faInfo,
+  faTimes,
+  faHeart,
+  faUserFriends,
+  faLongArrowAltLeft
+);

@@ -1,6 +1,5 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFireAlt, faInfo } from "@fortawesome/free-solid-svg-icons";
 import logo_sm from "../assets/images/logo/logo26px.png";
 import logo_md from "../assets/images/logo/logo.png";
 
@@ -56,7 +55,7 @@ class CardSection extends React.Component {
         <header className="logo">
           <FontAwesomeIcon
             className="swinder-icon"
-            icon={faFireAlt}
+            icon="fire-alt"
             size={isMobile ? "3x" : "5x"}
             color="#F1C40F"
           />
@@ -77,7 +76,7 @@ class CardSection extends React.Component {
             <button onClick={this.handleShowUserInfo}>
               <FontAwesomeIcon
                 className="info-icon"
-                icon={faInfo}
+                icon="info"
                 style={{ fontSize: 22 }}
               />
             </button>

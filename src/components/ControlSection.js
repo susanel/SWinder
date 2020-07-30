@@ -1,10 +1,5 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTimes,
-  faHeart,
-  faUserFriends,
-} from "@fortawesome/free-solid-svg-icons";
 
 const ControlSection = ({
   handleNextUser,
@@ -16,7 +11,7 @@ const ControlSection = ({
     {
       className: "times",
       matchText: "nope",
-      icon: faTimes,
+      icon: "times",
       style: isMobile
         ? { width: 34, height: 34, color: "#EA6B4F" }
         : { width: 40, height: 40, color: "#EA6B4F" },
@@ -24,7 +19,7 @@ const ControlSection = ({
     {
       className: "heart",
       matchText: "like",
-      icon: faHeart,
+      icon: "heart",
       style: isMobile
         ? { width: 34, height: 34, color: "#76BF93" }
         : { width: 40, height: 40, color: "#76BF93" },
@@ -47,7 +42,7 @@ const ControlSection = ({
       ))}
       <button className="matches" onClick={handleShowMatches}>
         <FontAwesomeIcon
-          icon={faUserFriends}
+          icon="user-friends"
           style={{
             width: 30,
             height: 30,
