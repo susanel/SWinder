@@ -1,12 +1,3 @@
-// TO DO
-// 1. znależź sposób, aby homeworld sie poprawnie wyswietlalo
-// 2. Zablokowac klikanie w kolejna postać gdy juz raz sie kliknelo //done
-// 3. Wyswietlenie matcha
-// 4. Wyświetlenie wszystkich matchy //done
-// 5. Obrazki powinno si trzymac w /src - jes to dobra praktyka, znalezc na to sposob bo na razie nei wiem jaka podac sciezke (+ background w  SaSS pobiera plik z /src, a <img> z Reacta pobiera z /public)
-// 6. Pokazywanie 10 matchy, nastepne na kolejnej stronie
-// 7. Ewentualnie wyświetlac jeszcze gatunek
-
 import React, { Component } from "react";
 
 import CardSection from "./CardSection";
@@ -25,8 +16,7 @@ class App extends Component {
     users: [],
     likedUsers: [],
     nextUser: {},
-    nextUserLogInfo: {},
-    counter: 0,
+    counter: 1,
     showMatches: false,
     isButtonDisabled: false,
     isLoaded: false,
@@ -55,29 +45,27 @@ class App extends Component {
             hair_color: person.hair_color,
             eye_color: person.eye_color,
             gender: person.gender,
+            imgPath: this.getImgPath(),
+            message: this.getMessage(),
+            numberKm: Math.floor(Math.random() * 21),
+            numberMin: Math.floor(Math.random() * 60),
           };
-
-          if (this.state.users.length === 1) {
-            //gets data once "users" array got filled
-            const nextUser = this.state.users[0];
-            const nextUserLogInfo = this.generateNextUser(0);
-            this.setState({
-              nextUser,
-              nextUserLogInfo,
-            });
-          }
 
           return this.setState((prevState) => ({
             users: [...prevState.users, user],
           }));
         });
 
+        if (!data.previous) {
+          //gets data once "users" array got filled with first fetch()
+          this.updateNextUser();
+        }
+
         if (data.next) {
           //SWAPI delivers HTTP instead of HTTPS link that results with Mixed Content Error in browser, so I've replaced the link url
           let newAPI = data.next;
           newAPI = newAPI.replace("http", "https");
           this.getData(newAPI);
-          console.log(data.next);
         } else {
           setTimeout(() => {
             this.setState({
@@ -90,18 +78,20 @@ class App extends Component {
   };
 
   addNewMatch = () => {
-    const { users, counter, nextUserLogInfo } = this.state;
-    const user = {
-      likedUser: users[counter],
-      imgPath: nextUserLogInfo.imgPath,
-    };
+    const likedUser = this.state.nextUser;
     this.setState((prevState) => ({
-      likedUsers: [...prevState.likedUsers, user],
+      likedUsers: [...prevState.likedUsers, likedUser],
     }));
   };
 
-  getImgPath = (counter) => {
-    const imgPath = `/assets/images/characters/${++counter}.jpg`;
+  getImgPath = () => {
+    let counter = this.state.counter;
+    const imgPath = `/assets/images/characters/${counter}.jpg`;
+    counter++;
+
+    this.setState({
+      counter,
+    });
     return imgPath;
   };
 
@@ -111,14 +101,16 @@ class App extends Component {
     return message;
   };
 
-  generateNextUser = (counter) => {
-    const nextUserLogInfo = {
-      imgPath: this.getImgPath(counter),
-      message: this.getMessage(),
-      numberKm: Math.floor(Math.random() * 21),
-      numberMin: Math.floor(Math.random() * 60),
-    };
-    return nextUserLogInfo;
+  updateNextUser = () => {
+    const number = Math.floor(Math.random() * this.state.users.length);
+    let users = [...this.state.users];
+    const nextUser = users[number];
+    users.splice(number, 1);
+
+    this.setState({
+      nextUser,
+      users,
+    });
   };
 
   handleNextUser = (isMatch) => {
@@ -139,16 +131,9 @@ class App extends Component {
       img_div.classList.remove("like");
       img_div.classList.remove("nope");
 
-      let counter = this.state.counter;
-      counter++;
-
-      if (counter < this.state.users.length) {
-        const nextUserLogInfo = this.generateNextUser(counter);
-
+      if (this.state.users.length !== 0) {
+        this.updateNextUser();
         this.setState({
-          counter,
-          nextUser: this.state.users[counter],
-          nextUserLogInfo,
           isButtonDisabled: false,
         });
       } else {
@@ -189,7 +174,6 @@ class App extends Component {
     const {
       showMatches,
       nextUser,
-      nextUserLogInfo,
       isButtonDisabled,
       likedUsers,
       isLoaded,
@@ -208,11 +192,7 @@ class App extends Component {
               />
             ) : (
               <div className="card-wrap">
-                <CardSection
-                  nextUser={nextUser}
-                  nextUserLogInfo={nextUserLogInfo}
-                  isMobile={isMobile}
-                />
+                <CardSection nextUser={nextUser} isMobile={isMobile} />
                 <ControlSection
                   handleNextUser={this.handleNextUser}
                   handleShowMatches={this.handleShowMatches}

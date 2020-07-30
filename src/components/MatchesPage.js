@@ -4,20 +4,20 @@ import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
 import logo2_sm from "../assets/images/logo/logo28px.png";
 import logo2_md from "../assets/images/logo/logo65px.png";
 
-const Match = ({ imgPath, user }) => {
+const Match = ({ name, imgPath }) => {
   return (
     <div className="match">
       <div className="image-container">
         <img src={process.env.PUBLIC_URL + imgPath} alt="user" />
       </div>
-      <h2>{user.name}</h2>
+      <h2>{name}</h2>
     </div>
   );
 };
 
 const MatchesPage = ({ likedUsers, handleShowMatches, isMobile }) => {
   const users = likedUsers.map((user, i) => (
-    <Match key={i} imgPath={user.imgPath} user={user.likedUser} />
+    <Match key={i} imgPath={user.imgPath} name={user.name} />
   ));
 
   const noMatchesMessage = (

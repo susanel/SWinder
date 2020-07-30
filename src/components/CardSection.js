@@ -4,7 +4,7 @@ import { faFireAlt, faInfo } from "@fortawesome/free-solid-svg-icons";
 import logo_sm from "../assets/images/logo/logo26px.png";
 import logo_md from "../assets/images/logo/logo.png";
 
-const AboutUserInfo = ({ user, nextUserLogInfo, isActive }) => {
+const AboutUserInfo = ({ user, isActive }) => {
   const componentClasses = ["about"];
   if (isActive) {
     componentClasses.push("show");
@@ -28,11 +28,11 @@ const AboutUserInfo = ({ user, nextUserLogInfo, isActive }) => {
   return (
     <div className={componentClasses.join(" ")}>
       <div className="log-info">
-        <span>{nextUserLogInfo.numberKm} kilometers away</span>
-        <span> Active: {nextUserLogInfo.numberMin} minutes ago</span>
+        <span>{user.numberKm} kilometers away</span>
+        <span> Active: {user.numberMin} minutes ago</span>
       </div>
       <div className="pickup-line">
-        <p>{nextUserLogInfo.message}</p>
+        <p>{user.message}</p>
       </div>
       <div className="features">{info_divs}</div>
     </div>
@@ -49,7 +49,7 @@ class CardSection extends React.Component {
   };
 
   render() {
-    const { nextUser, nextUserLogInfo, isMobile } = this.props;
+    const { nextUser, isMobile } = this.props;
 
     return (
       <section className="card">
@@ -65,7 +65,7 @@ class CardSection extends React.Component {
         <article className="person">
           <div className="image-container">
             <img
-              src={process.env.PUBLIC_URL + nextUserLogInfo.imgPath}
+              src={process.env.PUBLIC_URL + nextUser.imgPath}
               alt={nextUser.name}
             />
           </div>
@@ -82,11 +82,7 @@ class CardSection extends React.Component {
               />
             </button>
           </div>
-          <AboutUserInfo
-            isActive={this.state.isActive}
-            user={nextUser}
-            nextUserLogInfo={nextUserLogInfo}
-          />
+          <AboutUserInfo isActive={this.state.isActive} user={nextUser} />
         </article>
       </section>
     );
