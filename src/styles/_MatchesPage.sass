@@ -1,20 +1,20 @@
 /*! MATCHES PAGE */
 
 .matches-container
+  position: relative
   width: 100%
   color: $white
+  button.back
+    +pos(absolute,0,null,null,0)
+    background-color: transparent
+    transition: .4s
+    .arrow-icon
+      color: $yellow
+    &:hover
+      transform: translateX(-25%)
   .logo
-    position: relative
     margin: 20px 0 40px
     text-align: center   
-    // background-color: pink
-    button
-      +pos(absolute,50%,null,null,10px)
-      transform: translateY(-50%)
-      background-color: transparent
-      box-shadow: 0 0 5px 2px $yellow
-      &:hover
-        box-shadow: 0 0 5px 5px $yellow
   .matches
     display: flex
     flex-wrap: wrap
@@ -44,6 +44,12 @@
         &:hover
           transform: scale(1.1)
           filter: brightness(1.2)
+        &::after
+          +pseudo()
+          +pos(0,null,null,0)
+          width: 100%
+          height: 100%
+          background: linear-gradient(transparent 70%,$sheer-black)
       h2
         +pos(absolute,null,null,5%,5%)
     .no-matches
@@ -65,8 +71,6 @@
   .matches-container
     .logo
       margin: 10px 0 20px
-      button
-        left: 0
     .matches
       padding: 10px
       h1
@@ -83,9 +87,6 @@
     .logo
       padding-top: 50px
       margin-top: 0
-      button
-        +pos(absolute,0,null,null,0)
-        transform: translateY(0)
     .matches
       h1
         font-size: 2.6rem

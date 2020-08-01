@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
-import CardSection from "./CardSection";
-import ControlSection from "./ControlSection";
+import CardPage from "./CardPage";
 import MatchesPage from "./MatchesPage";
 import LoadingPage from "./LoadingPage";
 
@@ -191,15 +190,13 @@ class App extends Component {
                 isMobile={isMobile}
               />
             ) : (
-              <div className="card-wrap">
-                <CardSection nextUser={nextUser} isMobile={isMobile} />
-                <ControlSection
-                  handleNextUser={this.handleNextUser}
-                  handleShowMatches={this.handleShowMatches}
-                  isButtonDisabled={isButtonDisabled}
-                  isMobile={isMobile}
-                />
-              </div>
+              <CardPage
+                nextUser={nextUser}
+                isMobile={isMobile}
+                isButtonDisabled={isButtonDisabled}
+                handleNextUser={this.handleNextUser}
+                handleShowMatches={this.handleShowMatches}
+              />
             )}
           </main>
         ) : (

@@ -26,17 +26,17 @@ const MatchesPage = ({ likedUsers, handleShowMatches, isMobile }) => {
     </div>
   );
 
-  const style = isMobile
-    ? { width: 40, height: 30, color: "F1C40F" }
-    : { width: 50, height: 40, color: "F1C40F" };
-
   return (
     <>
       <div className="matches-container">
+        <button className="back" onClick={handleShowMatches}>
+          <FontAwesomeIcon
+            className="arrow-icon"
+            icon="long-arrow-alt-left"
+            size={isMobile ? "3x" : "4x"}
+          />
+        </button>
         <div className="logo">
-          <button onClick={handleShowMatches}>
-            <FontAwesomeIcon icon="long-arrow-alt-left" style={style} />
-          </button>
           <img src={isMobile ? logo2_sm : logo2_md} alt="Swinder logo" />
         </div>
 
