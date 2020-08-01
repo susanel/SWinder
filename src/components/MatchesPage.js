@@ -1,5 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 import logo2_sm from "../assets/images/logo/logo28px.png";
 import logo2_md from "../assets/images/logo/logo65px.png";
 
@@ -14,7 +15,7 @@ const Match = ({ name, imgPath }) => {
   );
 };
 
-const MatchesPage = ({ likedUsers, handleShowMatches, isMobile }) => {
+const MatchesPage = ({ likedUsers, isMobile }) => {
   const users = likedUsers.map((user, i) => (
     <Match key={i} imgPath={user.imgPath} name={user.name} />
   ));
@@ -29,13 +30,16 @@ const MatchesPage = ({ likedUsers, handleShowMatches, isMobile }) => {
   return (
     <>
       <div className="matches-container">
-        <button className="back" onClick={handleShowMatches}>
-          <FontAwesomeIcon
-            className="arrow-icon"
-            icon="long-arrow-alt-left"
-            size={isMobile ? "3x" : "4x"}
-          />
-        </button>
+        <Link to="/card">
+          <button className="back">
+            <FontAwesomeIcon
+              className="arrow-icon"
+              icon="long-arrow-alt-left"
+              size={isMobile ? "3x" : "4x"}
+            />
+          </button>
+        </Link>
+
         <div className="logo">
           <img src={isMobile ? logo2_sm : logo2_md} alt="Swinder logo" />
         </div>

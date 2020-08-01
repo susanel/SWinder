@@ -63,13 +63,7 @@ class CardPage extends React.Component {
   };
 
   render() {
-    const {
-      nextUser,
-      isMobile,
-      isButtonDisabled,
-      handleNextUser,
-      handleShowMatches,
-    } = this.props;
+    const { nextUser, isMobile, isButtonDisabled, handleNextUser } = this.props;
 
     return (
       <div className="card-wrap">
@@ -108,7 +102,6 @@ class CardPage extends React.Component {
         </div>
         <ControlSection
           handleNextUser={handleNextUser}
-          handleShowMatches={handleShowMatches}
           isButtonDisabled={isButtonDisabled}
           isMobile={isMobile}
         />

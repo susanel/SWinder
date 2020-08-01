@@ -1,8 +1,11 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import CardPage from "./CardPage";
 import MatchesPage from "./MatchesPage";
 import LoadingPage from "./LoadingPage";
+import LoginPage from "./LoginPage";
+import ErrorPage from "./ErrorPage";
 
 const characterMessages = [
   "I have a big lightsaber and know how to use it...",
@@ -16,7 +19,6 @@ class App extends Component {
     likedUsers: [],
     nextUser: {},
     counter: 1,
-    showMatches: false,
     isButtonDisabled: false,
     isLoaded: false,
     isMobile: false,
@@ -62,6 +64,8 @@ class App extends Component {
 
         if (data.next) {
           //SWAPI delivers HTTP instead of HTTPS link that results with Mixed Content Error in browser, so I've replaced the link url
+          console.log(data.next);
+
           let newAPI = data.next;
           newAPI = newAPI.replace("http", "https");
           this.getData(newAPI);
@@ -141,12 +145,6 @@ class App extends Component {
     }, 800);
   };
 
-  handleShowMatches = () => {
-    this.setState({
-      showMatches: !this.state.showMatches,
-    });
-  };
-
   handleWindowResize = () => {
     if (window.innerWidth < 768 && !this.state.isMobile) {
       this.setState({
@@ -171,7 +169,6 @@ class App extends Component {
 
   render() {
     const {
-      showMatches,
       nextUser,
       isButtonDisabled,
       likedUsers,
@@ -180,29 +177,42 @@ class App extends Component {
     } = this.state;
 
     return (
-      <>
-        {isLoaded ? (
-          <main className="app">
-            {showMatches ? (
-              <MatchesPage
-                likedUsers={likedUsers}
-                handleShowMatches={this.handleShowMatches}
-                isMobile={isMobile}
-              />
-            ) : (
-              <CardPage
-                nextUser={nextUser}
-                isMobile={isMobile}
-                isButtonDisabled={isButtonDisabled}
-                handleNextUser={this.handleNextUser}
-                handleShowMatches={this.handleShowMatches}
-              />
-            )}
-          </main>
-        ) : (
-          <LoadingPage />
-        )}
-      </>
+      <Router basename={process.env.PUBLIC_URL}>
+        <main className="app">
+          <Switch>
+            <Route path="/" exact component={LoginPage} />
+            <Route
+              path="/card"
+              render={(props) => {
+                if (isLoaded) {
+                  return (
+                    <CardPage
+                      {...props}
+                      nextUser={nextUser}
+                      isMobile={isMobile}
+                      isButtonDisabled={isButtonDisabled}
+                      handleNextUser={this.handleNextUser}
+                    />
+                  );
+                } else {
+                  return <LoadingPage />;
+                }
+              }}
+            />
+            <Route
+              path="/matches"
+              render={(props) => (
+                <MatchesPage
+                  {...props}
+                  likedUsers={likedUsers}
+                  isMobile={isMobile}
+                />
+              )}
+            />
+            <Route component={ErrorPage} />
+          </Switch>
+        </main>
+      </Router>
     );
   }
 }
