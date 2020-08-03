@@ -7,6 +7,9 @@ import LoadingPage from "./LoadingPage";
 import LoginPage from "./LoginPage";
 import ErrorPage from "./ErrorPage";
 
+//user - a person looking for love in Swinder App
+//character - SW character
+
 const characterMessages = [
   "I have a big lightsaber and know how to use it...",
   "Have been looking for love in Alderaan places.",
@@ -180,7 +183,11 @@ class App extends Component {
       <Router basename={process.env.PUBLIC_URL}>
         <main className="app">
           <Switch>
-            <Route path="/" exact component={LoginPage} />
+            <Route
+              path="/"
+              exact
+              render={(props) => <LoginPage {...props} isMobile={isMobile} />}
+            />
             <Route
               path="/card"
               render={(props) => {

@@ -1,0 +1,157 @@
+/*! LOGIN PAGE */
+
+.login
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  min-height: 90vh
+  .logo
+    padding-top: 10px
+    margin-bottom: 30px
+    text-align: center
+    .swinder-icon
+      margin-right: 10px
+  h1
+    padding: 0 10px
+    color: $white    
+    font-size: 2.6rem
+    text-align: center
+    letter-spacing: 1px
+
+  // Username input 
+  form
+    display: flex
+    flex-direction: column
+    align-items: center
+    position: relative
+    padding: 20px 20px 68px
+    text-align: center
+    overflow: hidden
+    .floating-label
+      position: relative
+      display: inline-block
+      padding-top: 30px
+      margin-bottom: 16px
+      overflow: hidden
+      label
+        +pos(absolute,null,null,0,0)
+        height: 50%
+        padding: 0 .5em 
+        color: $white
+        font-size: 2rem
+        text-align: left
+        transform: translateY(0%)
+        transition: .4s
+      input
+        width: 100%
+        padding: 4px 0.5em
+        font-family: 'Montserrat', sans-serif
+        font-size: 2rem
+        background-color: transparent
+        color: $white
+        &:focus+label, &:valid+label
+          transform: translateY(-110%) 
+      &::before,&::after
+        +pseudo()
+        +pos(absolute,null,null,0,0)
+        width: 100%
+        height: 0%
+      &::before
+        border-bottom: 1px solid #aaa
+      &::after
+        border-bottom: 4px solid $yellow
+        transform: translateX(-120%)
+        transition: .6s
+    .floating-label.filled
+      &::after
+        transform: translateX(0)
+
+  //Radio buttons
+  form
+    .user-gender,.character-gender
+      display: flex
+      flex-wrap: wrap
+      justify-content: space-evenly
+      max-width: 480px
+      margin-bottom: 20px
+      p
+        flex-basis: 100%
+        padding: 10px
+        color: $white
+        font-size: 2.4rem
+      .radio-container
+        margin: 4px 0
+        input[type="radio"]
+          opacity: 0
+          position: absolute
+          width: 0
+          height: 0
+        input[type="radio"]:checked
+          &+label.gender
+            background-color: $yellow
+        label.gender
+          display: flex
+          align-items: center
+          width: 140px
+          padding: 5px 12px
+          border-radius: 5px
+          font-size: 2rem
+          background-color: $sheer-white
+          line-height: 50px
+          cursor: pointer
+          span
+            flex-grow: 1
+          &:hover
+            background-color: $white 
+    button, a.find-match
+      +pos(absolute, null,null,16px,50%)
+      transform: translateX(-50%)
+      width: 210px
+      padding: 0 30px
+      border: 2px solid $yellow
+      line-height: 44px
+      font-size: 2rem
+      font-weight: 700
+      letter-spacing: 1px
+      text-transform: uppercase
+      color: $white
+      border-radius: 5px
+      background-color: transparent
+      transition: color .3s, background-color .3s, left .8s
+      &:hover
+        color: $gray
+        background-color: $yellow
+    button.hide
+      left: -30vw
+    a.find-match.hide
+      left: 130vw
+      
+@media (max-width:767px) and (orientation:landscape)
+  .login
+    h1
+      font-size: 2rem
+    form
+      flex-direction: row
+      flex-wrap: wrap
+      .floating-label
+        flex-basis: 100%
+        label
+          font-size: 1.8rem
+      .user-gender,.character-gender
+        //flex-child
+        flex-basis: 50%
+        //flex parent
+        flex-direction: column
+        align-items: center
+
+@media (max-width:532px)
+  .login
+    padding: 5px
+    h1
+      line-height: 140%
+    form
+      padding: 20px 10px 68px
+      .floating-label
+        width: 100%
+

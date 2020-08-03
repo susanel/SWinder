@@ -8,6 +8,9 @@ import {
   faHeart,
   faUserFriends,
   faLongArrowAltLeft,
+  faFemale,
+  faMale,
+  faRobot,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -18,5 +21,8 @@ library.add(
   faTimes,
   faHeart,
   faUserFriends,
-  faLongArrowAltLeft
+  faLongArrowAltLeft,
+  faFemale,
+  faMale,
+  faRobot
 );
