@@ -1,11 +1,9 @@
 /*! LOADING PAGE */
 
 .loading
-  position: relative
   height: 90vh 
-  background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.6) 30% 70%,transparent),linear-gradient( transparent 0%, rgba(0,0,0,0.6) 30% 70%,transparent)
   p
-    +pos(absolute,null,null,10%,50%)
+    +pos(fixed,null,null,10vh,50%)
     transform: translateX(-50%)
     width: 80%
     font-size: 3rem
@@ -13,7 +11,7 @@
     text-align: center
     letter-spacing: 1px
   .image-container
-    +position_center()
+    +position_center(fixed)
     +circle(200px)
     border: 3px solid white
     overflow: hidden
@@ -22,8 +20,8 @@
       width: 100%   
   &::after,&::before
     +pseudo()
+    +position_center(fixed)
     z-index: 1
-    +position_center()
   &::before
     animation: pulsing500 infinite 3s linear
   &::after
@@ -32,7 +30,6 @@
 @media (max-width: 767px) and (orientation: landscape)
   .loading
     p
-      bottom: 5%
       width: 100%
       font-size: 1.8rem
     .image-container
