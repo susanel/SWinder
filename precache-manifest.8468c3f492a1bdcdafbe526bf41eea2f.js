@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2b259b24cacd5c456a7b521461d65321",
+    "revision": "18fbbfd90eae156a720317fdc28241e1",
     "url": "/SWinder/index.html"
   },
   {
-    "revision": "0bbd4d81fb3353b981d2",
-    "url": "/SWinder/static/css/main.b92c61f1.chunk.css"
+    "revision": "8df91142fa3aaf4a615e",
+    "url": "/SWinder/static/css/main.5abcba6d.chunk.css"
   },
   {
-    "revision": "ff0ac870a3c61b63e21f",
-    "url": "/SWinder/static/js/2.ccfba0e9.chunk.js"
+    "revision": "f459a076c00bc07fe341",
+    "url": "/SWinder/static/js/2.32eba318.chunk.js"
   },
   {
-    "revision": "e88a3e95b5364d46e95b35ae8c0dc27d",
-    "url": "/SWinder/static/js/2.ccfba0e9.chunk.js.LICENSE.txt"
+    "revision": "c64c486544348f10a6d6c716950bc223",
+    "url": "/SWinder/static/js/2.32eba318.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "0bbd4d81fb3353b981d2",
-    "url": "/SWinder/static/js/main.94ed41dc.chunk.js"
+    "revision": "8df91142fa3aaf4a615e",
+    "url": "/SWinder/static/js/main.5d6ad868.chunk.js"
   },
   {
     "revision": "bb4ad3240daf4eb07d9f",
