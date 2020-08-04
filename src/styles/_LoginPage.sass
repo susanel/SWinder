@@ -13,6 +13,7 @@
     .swinder-icon
       margin-right: 10px
   h1
+    font-family: 'Montserrat', sans-serif
     padding: 0 10px
     color: $white    
     font-size: 2.6rem
@@ -39,6 +40,7 @@
         height: 50%
         padding: 0 .5em 
         color: $white
+        font-weight: normal
         font-size: 2rem
         text-align: left
         transform: translateY(0%)
@@ -79,6 +81,7 @@
         flex-basis: 100%
         padding: 10px
         color: $white
+        letter-spacing: 1px
         font-size: 2.4rem
       .radio-container
         margin: 4px 0
@@ -107,16 +110,15 @@
     button, a.find-match
       +pos(absolute, null,null,16px,50%)
       transform: translateX(-50%)
-      width: 210px
-      padding: 0 30px
+      width: 240px
+      // padding: 0 30px
       border: 2px solid $yellow
       line-height: 44px
       font-size: 2rem
-      font-weight: 700
       letter-spacing: 1px
       text-transform: uppercase
       color: $white
-      border-radius: 5px
+      border-radius: 25px
       background-color: transparent
       transition: color .3s, background-color .3s, left .8s
       &:hover
@@ -130,20 +132,20 @@
 @media (max-width:767px) and (orientation:landscape)
   .login
     h1
-      font-size: 2rem
+      font-size: 2.2rem
     form
       flex-direction: row
       flex-wrap: wrap
       .floating-label
         flex-basis: 100%
-        label
-          font-size: 1.8rem
       .user-gender,.character-gender
         //flex-child
         flex-basis: 50%
         //flex parent
         flex-direction: column
         align-items: center
+        p
+          font-size: 2rem
 
 @media (max-width:532px)
   .login
