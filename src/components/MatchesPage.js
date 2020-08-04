@@ -3,6 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import logo2_sm from "../assets/images/logo/logo28px.png";
 import logo2_md from "../assets/images/logo/logo65px.png";
+import kylo from "../assets/images/characters/kylo.jpg";
+import rey from "../assets/images/characters/rey.jpg";
+import l337 from "../assets/images/characters/l337.jpg";
 
 const Match = ({ name, imgPath }) => {
   return (
@@ -10,12 +13,12 @@ const Match = ({ name, imgPath }) => {
       <div className="image-container">
         <img src={process.env.PUBLIC_URL + imgPath} alt="user" />
       </div>
-      <h2>{name}</h2>
+      <p>{name}</p>
     </div>
   );
 };
 
-const MatchesPage = ({ likedUsers, isMobile }) => {
+const MatchesPage = ({ likedUsers, isMobile, username, userSex }) => {
   const users = likedUsers.map((user, i) => (
     <Match key={i} imgPath={user.imgPath} name={user.name} />
   ));
@@ -26,6 +29,16 @@ const MatchesPage = ({ likedUsers, isMobile }) => {
       <p>Give more "likes" to get laid in the Universum.</p>
     </div>
   );
+
+  const resolveUserSex = () => {
+    if (userSex === "male") {
+      return kylo;
+    } else if (userSex === "female") {
+      return rey;
+    } else {
+      return l337;
+    }
+  };
 
   return (
     <>
@@ -45,7 +58,18 @@ const MatchesPage = ({ likedUsers, isMobile }) => {
         </div>
 
         <div className="matches">
-          <h1>Your matches</h1>
+          <div className="my-profile">
+            <h2>My profile</h2>
+
+            <div className="image-container">
+              <img
+                src={userSex !== "" ? resolveUserSex() : null}
+                alt="Kylo Ren"
+              />
+            </div>
+            <h3>{username}</h3>
+          </div>
+          <h1> My matches </h1>
           {likedUsers.length === 0 ? noMatchesMessage : users}
         </div>
       </div>
