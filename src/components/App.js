@@ -20,10 +20,15 @@ class App extends Component {
   state = {
     users: [],
     likedUsers: [],
+    filteredCharacters: [],
     nextUser: {},
     counter: 1,
+    username: "",
+    userSex: "",
+    characterSex: "",
     isButtonDisabled: false,
-    isLoaded: false,
+    isLoadedAPI: false,
+    isLoadedFilteredData: false,
     isMobile: false,
   };
 
@@ -60,11 +65,6 @@ class App extends Component {
           }));
         });
 
-        if (!data.previous) {
-          //gets data once "users" array got filled with first fetch()
-          this.updateNextUser();
-        }
-
         if (data.next) {
           //SWAPI delivers HTTP instead of HTTPS link that results with Mixed Content Error in browser, so I've replaced the link url
           console.log(data.next);
@@ -73,14 +73,29 @@ class App extends Component {
           newAPI = newAPI.replace("http", "https");
           this.getData(newAPI);
         } else {
-          setTimeout(() => {
-            this.setState({
-              isLoaded: true,
-            });
-          }, 6000);
+          // setTimeout(() => {
+          this.setState({
+            isLoadedAPI: true,
+          });
+          // }, 6000);
         }
       })
       .catch((error) => console.log(error));
+  };
+
+  getFilteredData = (username, userSex, characterSex) => {
+    const filteredCharacters = this.filterCharacters(characterSex);
+    setTimeout(() => {
+      this.setState({
+        isLoadedFilteredData: true,
+      });
+    }, 8000);
+    this.setState({
+      username,
+      userSex,
+      characterSex,
+      filteredCharacters,
+    });
   };
 
   addNewMatch = () => {
@@ -107,16 +122,41 @@ class App extends Component {
     return message;
   };
 
-  updateNextUser = () => {
-    const number = Math.floor(Math.random() * this.state.users.length);
-    let users = [...this.state.users];
-    const nextUser = users[number];
-    users.splice(number, 1);
+  updateNextUser = (filteredCharacters) => {
+    const number = Math.floor(Math.random() * filteredCharacters.length);
+    // console.log(number);
+
+    const nextUser = filteredCharacters[number];
+    filteredCharacters.splice(number, 1);
+    // console.log(nextUser);
 
     this.setState({
       nextUser,
-      users,
+      filteredCharacters,
     });
+  };
+
+  filterCharacters = (characterSex) => {
+    // filteredCharacters
+    // console.log(characterSex);
+    const users = [...this.state.users];
+    let filteredCharacters;
+    // console.log(users);
+    if (characterSex === "male" || characterSex === "female") {
+      filteredCharacters = users.filter((user) => user.gender === characterSex);
+      // console.log("inside", filteredCharacters);
+    } else {
+      filteredCharacters = users.filter(
+        (user) => user.gender !== "female" && user.gender !== "male"
+      );
+      // console.log("inside", filteredCharacters);
+    }
+
+    this.updateNextUser(filteredCharacters);
+    return filteredCharacters;
+    // this.setState({
+    //   filteredCharacters,
+    // });
   };
 
   handleNextUser = (isMatch) => {
@@ -137,13 +177,13 @@ class App extends Component {
       img_div.classList.remove("like");
       img_div.classList.remove("nope");
 
-      if (this.state.users.length !== 0) {
-        this.updateNextUser();
+      if (this.state.filteredCharacters.length !== 0) {
+        this.updateNextUser(this.state.filteredCharacters);
         this.setState({
           isButtonDisabled: false,
         });
       } else {
-        alert("No more Swinder users at the moment!");
+        alert("No more Swinder users matching your search at the moment!");
       }
     }, 800);
   };
@@ -173,9 +213,12 @@ class App extends Component {
   render() {
     const {
       nextUser,
-      isButtonDisabled,
+      userSex,
+      username,
       likedUsers,
-      isLoaded,
+      isButtonDisabled,
+      isLoadedAPI,
+      isLoadedFilteredData,
       isMobile,
     } = this.state;
 
@@ -186,12 +229,18 @@ class App extends Component {
             <Route
               path="/"
               exact
-              render={(props) => <LoginPage {...props} isMobile={isMobile} />}
+              render={(props) => (
+                <LoginPage
+                  {...props}
+                  isMobile={isMobile}
+                  getFilteredData={this.getFilteredData}
+                />
+              )}
             />
             <Route
               path="/card"
               render={(props) => {
-                if (isLoaded) {
+                if (isLoadedAPI && isLoadedFilteredData) {
                   return (
                     <CardPage
                       {...props}
@@ -202,7 +251,7 @@ class App extends Component {
                     />
                   );
                 } else {
-                  return <LoadingPage />;
+                  return <LoadingPage {...props} userSex={userSex} />;
                 }
               }}
             />
@@ -213,6 +262,8 @@ class App extends Component {
                   {...props}
                   likedUsers={likedUsers}
                   isMobile={isMobile}
+                  username={username}
+                  userSex={userSex}
                 />
               )}
             />

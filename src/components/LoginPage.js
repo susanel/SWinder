@@ -55,10 +55,12 @@ class LoginPage extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const { username, userSex, characterSex } = this.state;
     const validation = this.formValidation();
     if (validation.correct) {
       document.querySelector(".login button").classList.add("hide");
       document.querySelector(".login a.find-match").classList.remove("hide");
+      this.props.getFilteredData(username, userSex, characterSex);
     } else if (!validation.username) {
       alert("The name should be between 3 and 20 characters long. Try again!");
     } else if (!validation.userSex || !validation.characterSex) {
