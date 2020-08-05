@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/SWinder/static/css/main.8e1671ca.chunk.css",
-    "main.js": "/SWinder/static/js/main.52b1402e.chunk.js",
-    "main.js.map": "/SWinder/static/js/main.52b1402e.chunk.js.map",
+    "main.css": "/SWinder/static/css/main.4ca25737.chunk.css",
+    "main.js": "/SWinder/static/js/main.b541c7b0.chunk.js",
+    "main.js.map": "/SWinder/static/js/main.b541c7b0.chunk.js.map",
     "runtime-main.js": "/SWinder/static/js/runtime-main.c57617b5.js",
     "runtime-main.js.map": "/SWinder/static/js/runtime-main.c57617b5.js.map",
     "static/js/2.2feaa950.chunk.js": "/SWinder/static/js/2.2feaa950.chunk.js",
     "static/js/2.2feaa950.chunk.js.map": "/SWinder/static/js/2.2feaa950.chunk.js.map",
     "index.html": "/SWinder/index.html",
-    "precache-manifest.3ed878175ce89e87f8c50291164a123b.js": "/SWinder/precache-manifest.3ed878175ce89e87f8c50291164a123b.js",
+    "precache-manifest.34d1616fb6b46e3d60e02ca6b7251578.js": "/SWinder/precache-manifest.34d1616fb6b46e3d60e02ca6b7251578.js",
     "service-worker.js": "/SWinder/service-worker.js",
-    "static/css/main.8e1671ca.chunk.css.map": "/SWinder/static/css/main.8e1671ca.chunk.css.map",
+    "static/css/main.4ca25737.chunk.css.map": "/SWinder/static/css/main.4ca25737.chunk.css.map",
     "static/js/2.2feaa950.chunk.js.LICENSE.txt": "/SWinder/static/js/2.2feaa950.chunk.js.LICENSE.txt",
     "static/media/19.jpg": "/SWinder/static/media/19.ac3f9ecd.jpg",
     "static/media/kylo.jpg": "/SWinder/static/media/kylo.871d37bf.jpg",
@@ -21,7 +21,7 @@
   "entrypoints": [
     "static/js/runtime-main.c57617b5.js",
     "static/js/2.2feaa950.chunk.js",
-    "static/css/main.8e1671ca.chunk.css",
-    "static/js/main.52b1402e.chunk.js"
+    "static/css/main.4ca25737.chunk.css",
+    "static/js/main.b541c7b0.chunk.js"
   ]
 }
