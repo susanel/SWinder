@@ -4,35 +4,36 @@
   min-height: 90vh
   flex-direction: column
   align-items: center
-  justify-content: center
+  justify-content: space-between
 
 .card
-  width: 400px
   padding: 16px 10px
-  border-radius: 5px
+  border-radius: 10px
   background-color: $gray
   .logo
-    margin: 10px
+    height: 70px
     text-align: center
     .swinder-icon
       margin-right: 10px
   .person
+    position: relative
     padding: 10px
     border: 1px solid $sheer-white
-    border-radius: 5px
+    border-radius: 10px
     box-shadow: 0 1px 8px $sheer-white
     background-color: $white 
     overflow: hidden
     .image-container
       position: relative 
-      height: 400px
-      width: 100%
-      border-radius: 5px
+      height: 60vh
+      width: 62vh
+      border-radius: 10px
       overflow: hidden
       img
         +pos(absolute, 0, 0)
         width: 100%
         z-index: 1
+        border-radius: 10px
       &.like::after
         color: #76BF93
         +pseudo("like")
@@ -49,43 +50,36 @@
         letter-spacing: 2px
         text-transform: uppercase
         transform: translate(-50%,-50%) rotate(-20deg)
-        z-index: 1
-    .username
-      position: relative
-      padding: 10px 10px
-      border-radius: 10px
-      font-size: 2.6rem
-      strong
-        margin-right: 14px
-      span
-        display: inline-block
-      &::after
-        +pseudo()
-        +pos(absolute,-10px,null,null,0)
-        width: 100%
-        height: 110%
-        border: 1px solid gray
-        border-radius: 10px
-      button
-        +pos(absolute, 10px, 10px)
-        +circle(30px)
-        color: $yellow
-        background-color: $gray
-        transform: translateY(-170%)
-        box-shadow: 0 0 2px $white
-        transition: .4s
-        z-index: 1
-        &:hover
-          transform: translateY(-170%) scale(1.2)
+        z-index: 3
     .about
-      max-height: 0px
-      padding: 0 12px
+      +pos(absolute,null,0,0,0)
+      padding: 16px
+      border-radius: 10px
       font-size: 1.6rem
-      background-color: $white
-      color: #555
-      opacity: 0
-      transition: .7s linear max-height .7s,.7s linear opacity 0s
-      overflow: hidden
+      background-color: $sheer-black
+      color: $white
+      transform: translateY(calc(100% - 60px))
+      transition: .7s linear transform
+      z-index: 2
+      .username
+        position: relative
+        min-height: 52px
+        font-size: 2.6rem
+        color: $white
+        strong
+          margin-right: 10px
+        span
+          display: inline-block
+        button
+          +pos(absolute,0,0,null,null)
+          +circle(30px)
+          color: $yellow
+          background-color: $gray
+          box-shadow: 0 0 4px $white
+          transition: .3s
+          z-index: 2
+          &:hover
+            transform: scale(1.2)
       .log-info
         font-size: 1.4rem
         div
@@ -102,56 +96,59 @@
         .feature
           display: flex
           justify-content: space-between
-          line-height: 140%
+          line-height: 160%
           strong
             letter-spacing: 1px
+            &::first-letter
+              text-transform: uppercase
 
     .about.show
-      transition: .7s linear max-height 0s,.7s linear opacity .7s
-      opacity: 1
-      max-height: 250px
+      transition: .7s linear transform
+      transform: translateY(0%)
 
 @media (max-width: 823px) and (orientation:landscape)
   .card
-    margin-top: 0
-    padding-top: 0
     width: 100%
+    padding: 0
+    .logo
+      display: none
     .person
       display: flex
-      justify-content: space-evenly
+      justify-content: space-between
       flex-wrap: wrap
+      border: none
       .image-container
-        height: 220px
-        flex-basis: 40%
-        order: 0
+        height: auto
+        flex-basis: 46%
         &.like::after, &.nope::after
           padding: 4px 20px
           border: 4px solid
           font-size: 5rem
-      .username
-        font-size: 2rem
-        flex-basis: 50%
-        align-self: flex-start
-        flex-grow: 1
-        order: 2
-        margin: 0
-        button
-          display: none
-        &::after
-          top: 10%
-          height: 80%
       .about
-        flex-basis: 50%
-        max-height: 250px
-        opacity: 1
-        order: 1
-  
+        position: static
+        flex-basis: 52%
+        padding: 10px
+        transform: translateY(0%)
+        .username
+          height: auto
+          font-size: 2rem
+          margin: 0 0 4px
+          button
+            display: none
+
+@media (max-width: 767px)
+  .card
+    .logo
+      height: 40px
+      padding: 5px 0
+
 @media (max-width: 532px)
   .card
     width: 100%
     .person
       .image-container
-        height: 320px
+        width: 40vh
+        height: 60vh
         &.like::after, &.nope::after
           padding: 4px 20px
           border: 4px solid
@@ -161,14 +158,12 @@
 
 @media (max-width: 360px)
   .card
-    margin-top: 0
     .person
       .image-container
-        height: 260px
+        width: 40vh
+        height: 60vh
         &.like::after, &.nope::after
           font-size: 3rem
-      .username
-        margin-bottom: 4px
-        font-size: 1.6rem
-        strong
-          margin-right: 10px
+      .about
+        .username
+          font-size: 1.8rem

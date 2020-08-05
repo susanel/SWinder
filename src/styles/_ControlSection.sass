@@ -1,10 +1,11 @@
 /*! CONTROL SECTION */
   
 .btns
+  flex-basis: 10vh
   display: flex
   justify-content: center
   align-items: center
-  margin-top: 16px
+  // margin-top: 16px
   button.heart, button.times
     padding: 10px
     margin: 0 30px
@@ -16,16 +17,21 @@
       box-shadow: 0 0 5px 5px $yellow
   button.heart
     order: 2
-  button.matches
+  a
     padding: 8px
     border-radius: 10px
-    color: $white
+    color: $sheer-white
     background: transparent
     box-shadow: 0 0 3px 0px $white
     order: 1
     &:hover
+      color: $white
       box-shadow: 0 0 3px 2px $white
 
-@media (max-width: 823px)
+@media (max-width: 823px) and (orientation: landscape)
   .btns
+    +pos(fixed,null,0,0,0)
+    padding: 10px 0
     margin-top: 8px
+    background-color: $sheer-black
+    z-index: 2
