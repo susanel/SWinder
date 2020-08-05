@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/SWinder/static/css/main.91ee87a1.chunk.css",
-    "main.js": "/SWinder/static/js/main.1983dfd5.chunk.js",
-    "main.js.map": "/SWinder/static/js/main.1983dfd5.chunk.js.map",
+    "main.js": "/SWinder/static/js/main.756389d4.chunk.js",
+    "main.js.map": "/SWinder/static/js/main.756389d4.chunk.js.map",
     "runtime-main.js": "/SWinder/static/js/runtime-main.c57617b5.js",
     "runtime-main.js.map": "/SWinder/static/js/runtime-main.c57617b5.js.map",
     "static/js/2.2feaa950.chunk.js": "/SWinder/static/js/2.2feaa950.chunk.js",
     "static/js/2.2feaa950.chunk.js.map": "/SWinder/static/js/2.2feaa950.chunk.js.map",
     "index.html": "/SWinder/index.html",
-    "precache-manifest.46c93798190738191fc39e3f6be6e6fe.js": "/SWinder/precache-manifest.46c93798190738191fc39e3f6be6e6fe.js",
+    "precache-manifest.08a03b721f6bd45304db3a6db452a941.js": "/SWinder/precache-manifest.08a03b721f6bd45304db3a6db452a941.js",
     "service-worker.js": "/SWinder/service-worker.js",
     "static/css/main.91ee87a1.chunk.css.map": "/SWinder/static/css/main.91ee87a1.chunk.css.map",
     "static/js/2.2feaa950.chunk.js.LICENSE.txt": "/SWinder/static/js/2.2feaa950.chunk.js.LICENSE.txt",
@@ -22,6 +22,6 @@
     "static/js/runtime-main.c57617b5.js",
     "static/js/2.2feaa950.chunk.js",
     "static/css/main.91ee87a1.chunk.css",
-    "static/js/main.1983dfd5.chunk.js"
+    "static/js/main.756389d4.chunk.js"
   ]
 }

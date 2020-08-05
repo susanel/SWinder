@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "174632ab9db0823e6f456d0c0ffa329d",
+    "revision": "2d41ba8a513922f8b98e4cba6f638528",
     "url": "/SWinder/index.html"
   },
   {
-    "revision": "882591b0a5fb6eb7947e",
+    "revision": "45b2090b67bbe5283081",
     "url": "/SWinder/static/css/main.91ee87a1.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/SWinder/static/js/2.2feaa950.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "882591b0a5fb6eb7947e",
-    "url": "/SWinder/static/js/main.1983dfd5.chunk.js"
+    "revision": "45b2090b67bbe5283081",
+    "url": "/SWinder/static/js/main.756389d4.chunk.js"
   },
   {
     "revision": "bb4ad3240daf4eb07d9f",
