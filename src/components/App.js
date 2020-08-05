@@ -1,14 +1,11 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import CardPage from "./CardPage";
-import MatchesPage from "./MatchesPage";
-import LoadingPage from "./LoadingPage";
-import LoginPage from "./LoginPage";
-import ErrorPage from "./ErrorPage";
-
-//user - a person looking for love in Swinder App
-//character - SW character
+import CardPage from "../pages/CardPage";
+import MatchesPage from "../pages/MatchesPage";
+import LoadingPage from "../pages/LoadingPage";
+import LoginPage from "../pages/LoginPage";
+import ErrorPage from "../pages/ErrorPage";
 
 const characterMessages = [
   "I have a big lightsaber and know how to use it...",
@@ -18,11 +15,10 @@ const characterMessages = [
 
 class App extends Component {
   state = {
-    users: [],
-    likedUsers: [],
+    characters: [],
+    likedCharacters: [],
     filteredCharacters: [],
-    nextUser: {},
-    counter: 1,
+    nextCharacter: {},
     username: "",
     userSex: "",
     characterSex: "",
@@ -30,6 +26,7 @@ class App extends Component {
     isLoadedAPI: false,
     isLoadedFilteredData: false,
     isMobile: false,
+    counter: 1,
   };
 
   getData = (API = `https://swapi.dev/api/people/`) => {
@@ -46,7 +43,7 @@ class App extends Component {
       })
       .then((data) => {
         data.results.map((person) => {
-          const user = {
+          const character = {
             name: person.name,
             height: person.height,
             birth_year: person.birth_year,
@@ -61,7 +58,7 @@ class App extends Component {
           };
 
           return this.setState((prevState) => ({
-            users: [...prevState.users, user],
+            characters: [...prevState.characters, character],
           }));
         });
 
@@ -73,11 +70,9 @@ class App extends Component {
           newAPI = newAPI.replace("http", "https");
           this.getData(newAPI);
         } else {
-          // setTimeout(() => {
           this.setState({
             isLoadedAPI: true,
           });
-          // }, 6000);
         }
       })
       .catch((error) => console.log(error));
@@ -99,9 +94,9 @@ class App extends Component {
   };
 
   addNewMatch = () => {
-    const likedUser = this.state.nextUser;
+    const likedCharacter = this.state.nextCharacter;
     this.setState((prevState) => ({
-      likedUsers: [...prevState.likedUsers, likedUser],
+      likedCharacters: [...prevState.likedCharacters, likedCharacter],
     }));
   };
 
@@ -122,45 +117,39 @@ class App extends Component {
     return message;
   };
 
-  updateNextUser = (filteredCharacters) => {
+  updateNextCharacter = (filteredCharacters) => {
     const number = Math.floor(Math.random() * filteredCharacters.length);
-    // console.log(number);
 
-    const nextUser = filteredCharacters[number];
+    const nextCharacter = filteredCharacters[number];
     filteredCharacters.splice(number, 1);
-    // console.log(nextUser);
 
     this.setState({
-      nextUser,
+      nextCharacter,
       filteredCharacters,
     });
   };
 
   filterCharacters = (characterSex) => {
-    // filteredCharacters
-    // console.log(characterSex);
-    const users = [...this.state.users];
+    const characters = [...this.state.characters];
     let filteredCharacters;
-    // console.log(users);
     if (characterSex === "male" || characterSex === "female") {
-      filteredCharacters = users.filter((user) => user.gender === characterSex);
-      // console.log("inside", filteredCharacters);
+      filteredCharacters = characters.filter(
+        (user) => user.gender === characterSex
+      );
     } else {
-      filteredCharacters = users.filter(
+      filteredCharacters = characters.filter(
         (user) => user.gender !== "female" && user.gender !== "male"
       );
-      // console.log("inside", filteredCharacters);
     }
 
-    this.updateNextUser(filteredCharacters);
+    this.updateNextCharacter(filteredCharacters);
     return filteredCharacters;
-    // this.setState({
-    //   filteredCharacters,
-    // });
   };
 
-  handleNextUser = (isMatch) => {
+  handleNextCharacter = (isMatch) => {
     const img_div = document.querySelector(".image-container");
+    const about_div = document.querySelector(".about");
+    about_div.classList.remove("show");
 
     if (isMatch === "like") {
       img_div.classList.add("like");
@@ -178,14 +167,14 @@ class App extends Component {
       img_div.classList.remove("nope");
 
       if (this.state.filteredCharacters.length !== 0) {
-        this.updateNextUser(this.state.filteredCharacters);
+        this.updateNextCharacter(this.state.filteredCharacters);
         this.setState({
           isButtonDisabled: false,
         });
       } else {
         alert("No more Swinder users matching your search at the moment!");
       }
-    }, 800);
+    }, 900);
   };
 
   handleWindowResize = () => {
@@ -212,10 +201,10 @@ class App extends Component {
 
   render() {
     const {
-      nextUser,
+      nextCharacter,
       userSex,
       username,
-      likedUsers,
+      likedCharacters,
       isButtonDisabled,
       isLoadedAPI,
       isLoadedFilteredData,
@@ -224,7 +213,7 @@ class App extends Component {
 
     return (
       <Router basename={process.env.PUBLIC_URL}>
-        <main className="app">
+        <div className="app">
           <Switch>
             <Route
               path="/"
@@ -232,8 +221,9 @@ class App extends Component {
               render={(props) => (
                 <LoginPage
                   {...props}
-                  isMobile={isMobile}
                   getFilteredData={this.getFilteredData}
+                  username={username}
+                  isMobile={isMobile}
                 />
               )}
             />
@@ -244,10 +234,10 @@ class App extends Component {
                   return (
                     <CardPage
                       {...props}
-                      nextUser={nextUser}
+                      nextCharacter={nextCharacter}
                       isMobile={isMobile}
                       isButtonDisabled={isButtonDisabled}
-                      handleNextUser={this.handleNextUser}
+                      handleNextCharacter={this.handleNextCharacter}
                     />
                   );
                 } else {
@@ -260,7 +250,7 @@ class App extends Component {
               render={(props) => (
                 <MatchesPage
                   {...props}
-                  likedUsers={likedUsers}
+                  likedCharacters={likedCharacters}
                   isMobile={isMobile}
                   username={username}
                   userSex={userSex}
@@ -269,7 +259,7 @@ class App extends Component {
             />
             <Route component={ErrorPage} />
           </Switch>
-        </main>
+        </div>
       </Router>
     );
   }

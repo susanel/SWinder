@@ -2,7 +2,11 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
-const ControlSection = ({ handleNextUser, isButtonDisabled, isMobile }) => {
+const ControlSection = ({
+  handleNextCharacter,
+  isButtonDisabled,
+  isMobile,
+}) => {
   const btns = [
     {
       className: "times",
@@ -30,7 +34,7 @@ const ControlSection = ({ handleNextUser, isButtonDisabled, isMobile }) => {
           className={btn.className}
           disabled={isButtonDisabled}
           onClick={() => {
-            handleNextUser(btn.matchText);
+            handleNextCharacter(btn.matchText);
           }}
         >
           <FontAwesomeIcon icon={btn.icon} style={btn.style} />
@@ -42,14 +46,9 @@ const ControlSection = ({ handleNextUser, isButtonDisabled, isMobile }) => {
           style={{
             width: 30,
             height: 30,
-            color: "#F1C40F",
-            verticalAlign: "middle",
           }}
         />
       </Link>
-      {/* <button className="matches"
-        
-      </button> */}
     </section>
   );
 };

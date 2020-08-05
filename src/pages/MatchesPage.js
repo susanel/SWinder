@@ -1,4 +1,5 @@
 import React from "react";
+import Match from "../components/Match";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import logo2_sm from "../assets/images/logo/logo28px.png";
@@ -7,19 +8,8 @@ import kylo from "../assets/images/characters/kylo.jpg";
 import rey from "../assets/images/characters/rey.jpg";
 import l337 from "../assets/images/characters/l337.jpg";
 
-const Match = ({ name, imgPath }) => {
-  return (
-    <div className="match">
-      <div className="image-container">
-        <img src={process.env.PUBLIC_URL + imgPath} alt="user" />
-      </div>
-      <p>{name}</p>
-    </div>
-  );
-};
-
-const MatchesPage = ({ likedUsers, isMobile, username, userSex }) => {
-  const users = likedUsers.map((user, i) => (
+const MatchesPage = ({ likedCharacters, isMobile, username, userSex }) => {
+  const users = likedCharacters.map((user, i) => (
     <Match key={i} imgPath={user.imgPath} name={user.name} />
   ));
 
@@ -43,14 +33,12 @@ const MatchesPage = ({ likedUsers, isMobile, username, userSex }) => {
   return (
     <>
       <div className="matches-container">
-        <Link to="/card">
-          <button className="back">
-            <FontAwesomeIcon
-              className="arrow-icon"
-              icon="long-arrow-alt-left"
-              size={isMobile ? "3x" : "4x"}
-            />
-          </button>
+        <Link to="/card" className="back">
+          <FontAwesomeIcon
+            className="arrow-icon"
+            icon="long-arrow-alt-left"
+            size={isMobile ? "3x" : "4x"}
+          />
         </Link>
 
         <div className="logo">
@@ -60,7 +48,6 @@ const MatchesPage = ({ likedUsers, isMobile, username, userSex }) => {
         <div className="matches">
           <div className="my-profile">
             <h2>My profile</h2>
-
             <div className="image-container">
               <img
                 src={userSex !== "" ? resolveUserSex() : null}
@@ -70,7 +57,7 @@ const MatchesPage = ({ likedUsers, isMobile, username, userSex }) => {
             <h3>{username}</h3>
           </div>
           <h1> My matches </h1>
-          {likedUsers.length === 0 ? noMatchesMessage : users}
+          {likedCharacters.length === 0 ? noMatchesMessage : users}
         </div>
       </div>
     </>
