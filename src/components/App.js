@@ -70,7 +70,9 @@ class App extends Component {
           newAPI = newAPI.replace("http", "https");
           this.getData(newAPI);
         } else {
+          const counter = 1;
           this.setState({
+            counter,
             isLoadedAPI: true,
           });
         }
@@ -90,6 +92,8 @@ class App extends Component {
       userSex,
       characterSex,
       filteredCharacters,
+      likedCharacters: [],
+      isButtonDisabled: false,
     });
   };
 
@@ -189,10 +193,26 @@ class App extends Component {
     }
   };
 
+  manageLocalStorage = (request, nextState = null) => {
+    if (request === "set") {
+      sessionStorage.setItem("data", JSON.stringify(nextState));
+    } else if (request === "get") {
+      const data = JSON.parse(sessionStorage.getItem("data"));
+      data && this.setState(data);
+    }
+  };
+
   componentDidMount() {
-    this.getData();
+    const data = sessionStorage.getItem("data");
+    !data && this.getData();
+
     this.handleWindowResize();
     window.addEventListener("resize", this.handleWindowResize);
+    this.manageLocalStorage("get");
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    this.manageLocalStorage("set", nextState);
   }
 
   componentWillUnmount() {
