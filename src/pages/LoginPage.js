@@ -114,12 +114,8 @@ class LoginPage extends React.Component {
     }
   };
 
-  handleAddStyle = () => {
-    this.userNameDiv.classList.add("filled");
-  };
-
-  handleRemoveStyle = () => {
-    this.userNameDiv.classList.remove("filled");
+  handleToggleStyle = () => {
+    this.userNameDiv.classList.toggle("filled");
   };
 
   render() {
@@ -146,8 +142,8 @@ class LoginPage extends React.Component {
               name="username"
               value={this.state.username}
               required
-              onFocus={this.handleAddStyle}
-              onBlur={this.handleRemoveStyle}
+              onFocus={this.handleToggleStyle}
+              onBlur={this.handleToggleStyle}
               onChange={this.handleChange}
             />
             <label htmlFor="name">Name</label>
