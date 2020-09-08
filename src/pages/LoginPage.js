@@ -13,6 +13,10 @@ class LoginPage extends React.Component {
     checkedCharacterRadio: [false, false, false],
   };
 
+  submitBtn = null;
+  findMatchBtn = null;
+  userNameDiv = null;
+
   btns = [
     {
       icon: "male",
@@ -58,8 +62,8 @@ class LoginPage extends React.Component {
     const { username, userSex, characterSex } = this.state;
     const validation = this.formValidation();
     if (validation.correct) {
-      document.querySelector(".login button").classList.add("hide");
-      document.querySelector(".login a.find-match").classList.remove("hide");
+      this.submitBtn.classList.add("hide");
+      this.findMatchBtn.classList.remove("hide");
       this.props.getFilteredData(username, userSex, characterSex);
     } else if (!validation.username) {
       alert("The name should be between 3 and 20 characters long. Try again!");
@@ -111,11 +115,11 @@ class LoginPage extends React.Component {
   };
 
   handleAddStyle = () => {
-    document.querySelector(".floating-label").classList.add("filled");
+    this.userNameDiv.classList.add("filled");
   };
 
   handleRemoveStyle = () => {
-    document.querySelector(".floating-label").classList.remove("filled");
+    this.userNameDiv.classList.remove("filled");
   };
 
   render() {
@@ -135,7 +139,7 @@ class LoginPage extends React.Component {
         </header>
         <h1>Start your love journey by answering few questions</h1>
         <form onSubmit={this.handleSubmit} noValidate>
-          <div className="floating-label">
+          <div className="floating-label" ref={(el) => (this.userNameDiv = el)}>
             <input
               type="text"
               id="name"
@@ -186,8 +190,14 @@ class LoginPage extends React.Component {
               </div>
             ))}
           </div>
-          <button>Submit</button>
-          <Link to="/card" className="find-match hide">
+          <button ref={(el) => (this.submitBtn = el)}>Submit</button>
+          <Link
+            to="/card"
+            className="find-match hide"
+            ref={(el) => {
+              this.findMatchBtn = el;
+            }}
+          >
             Find match
           </Link>
         </form>
