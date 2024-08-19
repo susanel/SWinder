@@ -22,4 +22,4 @@ But really, it's a creative idea for displaying data collected from [Star Wars A
 
 ### Live version:
 
-[CLICK HERE](https://susanel92.github.io/SWinder/)
+[CLICK HERE](https://susanel.github.io/SWinder/)
